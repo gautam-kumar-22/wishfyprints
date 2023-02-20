@@ -1,0 +1,103 @@
+{% extends 'includes/base.html' %}
+{% load static %}
+{% load template_tags %}
+{% block content %}
+    
+  <!-- ==================== Page-Title (Start) ==================== -->
+  <div class="page-title">
+
+    <div class="title">
+      <h2>Edit Address</h2>
+    </div> 
+
+    <div class="link">
+      <a href="{% url 'home' %}" class="fas fa-home"></a>
+      <i class="fas fa-arrow-right"></i>
+      <span class="page">Edit Address</span>
+    </div>
+
+  </div>
+  <!-- ==================== Page-Title (End) ==================== -->
+  
+
+     
+  <!-- ==================== Edit Address (Start) ==================== -->
+  <section class="edit-address">
+
+    <form class="form" action="" method="post">
+      {% csrf_token %}
+      <h3>edit address</h3>
+      <h2>Shipping Address</h2>
+      <div class="input-box">
+        <input type="text" name="first_name" placeholder="first name" id="first-name" class="box" value="{{shipping_address.0.first_name}}" required >
+        <input type="text" name="last_name" placeholder="last name" id="last-name" class="box" required value="{{shipping_address.0.last_name}}">
+      </div>
+
+      <div class="input-box">
+        <input type="text" name="primary_address" placeholder="Primary Address(House No., Society, Street)" id="address1" class="box" required value="{{shipping_address.0.primary_address}}">
+        <input type="text" name="address" placeholder="Address(Road, Village) (Optional)" id="address2" class="box" value="{{shipping_address.0.primary_address2}}">
+      </div>
+
+      <div class="input-box">
+        <input type="text" name="city" placeholder="city" id="city" class="box" required value="{{shipping_address.0.city}}">
+        <input type="text" name="state" placeholder="state" id="state" class="box" required value="{{shipping_address.0.state}}">
+      </div>
+
+      <div class="input-box">
+        <input type="text" name="pin_code" placeholder="ZIP" id="zip" class="box" required value="{{shipping_address.0.pin_code}}" pattern="\d*" maxlength="6" minlength="6">
+        <input type="text" name="landmark" placeholder="landmark" id="landmark" class="box" required value="{{shipping_address.0.landmark}}">
+      </div>
+
+      <div class="input-box">
+        <input type="text" name="phone_number" placeholder="Phone Number" id="contact-number" class="box" required value="{{shipping_address.0.phone_number}}">
+      </div>
+
+      <div class="input-box">
+        <div class="info" style="margin-top: 10px;margin-bottom: 10px;font-size: 15px;">
+        <div class="remember">
+          <input type="checkbox" name="is_billing_same" id="is_billing_same"
+                 {% if shipping_address.0.is_billing_address_same_as_shipping %}
+                    checked="True"
+                {%endif%} value="1">
+          <label for="is_billing_same"> Billing address is same as shipping address. </label>
+        </div>
+      </div>
+      </div>
+
+
+      <div class="billing_address">
+        <h2>Billing Address</h2>
+        <div class="input-box">
+        <input type="text" name="billing_first_name" placeholder="first name" id="billing_first_name" class="box" value="{{billing_address.0.first_name}}" required >
+        <input type="text" name="billing_last_name" placeholder="last name" id="billing_last_name" class="box" required value="{{billing_address.0.last_name}}">
+      </div>
+
+      <div class="input-box">
+        <input type="text" name="billing_primary_address" placeholder="Primary Address(House No., Society, Street)" id="billing_primary_address" class="box" required value="{{billing_address.0.primary_address}}">
+        <input type="text" name="billing_primary_address2" placeholder="Address(Road, Village) (Optional)" id="billing_primary_address2" class="box" value="{{billing_address.0.primary_address2}}">
+      </div>
+
+      <div class="input-box">
+        <input type="text" name="billing_city" placeholder="city" id="billing_city" class="box" required value="{{billing_address.0.city}}">
+        <input type="text" name="billing_state" placeholder="state" id="billing_state" class="box" required value="{{billing_address.0.state}}">
+      </div>
+
+      <div class="input-box">
+        <input type="text" name="billing_pin_code" placeholder="ZIP" id="billing_pin_code" class="box" required value="{{billing_address.0.pin_code}}" pattern="\d*" maxlength="6" minlength="6">
+        <input type="text" name="billing_landmark" placeholder="landmark" id="billing_landmark" class="box" required value="{{billing_address.0.landmark}}">
+      </div>
+
+      <div class="input-box">
+        <input type="text" name="billing_phone_number" placeholder="Phone Number" id="billing_phone_number" class="box" required value="{{billing_address.0.phone_number}}">
+      </div>
+      </div>
+
+
+      <button type="submit" class="btn" name="edit-address" id="edit-address">Update Address</button>
+    </form>
+  
+  </section>
+  <!-- ==================== Edit Address (End) ==================== -->
+
+
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'includes/base.html' %}
+{% load static %}
+{% load template_tags %}
+{% block content %}
+  <!-- ==================== Page-Title (Start) ==================== -->
+  <div class="page-title">
+
+    <div class="title">
+      <h2>Order List</h2>
+    </div> 
+
+    <div class="link">
+      <a href="{% url 'home' %}" class="fas fa-home"></a>
+      <i class="fas fa-arrow-right"></i>
+      <span class="page">Order List</span>
+    </div>
+
+  </div>
+  <!-- ==================== Page-Title (End) ==================== -->
+
+  <!-- ==================== Order-List Area (Start) ==================== -->
+  <section>
+
+    <div class="order-list">
+      {% if orders %}
+      <div class="container">
+
+        <div class="shoplist-title">
+          <h3>order#ID</h3>
+          <h3>date</h3>
+          <h3>total</h3> 
+          <h3>status</h3>
+          <h3>action</h3>
+        </div> 
+
+        <div class="box-container">
+        {% for order in orders %}
+          <div class="orderlist-item">
+            <div class="box order-id">#{{ order.order_id }}</div>
+            <div class="box price">{{ order.created_on }}</div>
+            <div class="box total">{{order.total}}</div>
+            {% if order.payment_status %}
+            <div class="box status completed">Completed</div>
+            {% elif order.payment_status == 0 %}
+            <div class="box status processing">Pending</div>
+            {% elif order.payment_status == 3 %}
+            <div class="box status cancelled">Cancelled</div>
+            {% endif %}
+            <div class="box action"><a href="{% url 'order-detail' order.id %}" class="icon fas fa-eye"></a></div>
+          </div>
+        {% endfor %}
+        </div>
+
+      </div>
+      {% else %}
+        <div class="heading" style="min-height: 400px;">
+          <h2 style="text-transform: initial;">You haven't ordered anything yet.</h2> <br><br>
+            <h2><a style="color: var(--main-color)" href="{% url 'products' %}">Continue Shopping</a></h2>
+        </div>
+      {% endif %}
+    </div>
+
+  </section> 
+  <!-- ==================== Order-List Area (End) ==================== -->
+
+{% endblock %}

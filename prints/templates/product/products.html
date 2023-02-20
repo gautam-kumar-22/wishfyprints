@@ -1,0 +1,180 @@
+{% extends 'includes/base.html' %}
+{% load static %}
+{% load template_tags %}
+{% block content %}
+<style>
+    a.active{
+        color: var(--main-color) !important;
+    }
+</style>
+
+    <!-- ==================== Shop-List Area (Start) ==================== -->
+    <section class="shop">
+
+        <!-- ========== Shop Sidebar Area (Start) ========== -->
+        <div class="sidebar shop-sidebar">
+
+            <div class="category sidebar-item">
+
+                <div class="sidebar-heading">
+                    <h2>categories</h2>
+                </div> 
+
+                <div class="box-container">
+                    <div class="item">
+                        <a href="{% url 'products' %}?category=all"><i class="fas fa-circle-notch"></i>All</a>
+                        <p>({% count_product 'all' %})</p>
+                    </div>
+                    {% for category in categories %}
+                    <div class="item">
+                        <a href="{% url 'products' %}?category={{category.type}}"><i class="fas fa-circle-notch"></i>{{category.type|title}}</a>
+                        <p>({% count_product category.id %})</p>
+                    </div>
+                    {% endfor %}
+                </div>
+
+            </div>
+
+<!--            <div class="filter sidebar-item">-->
+
+<!--                <div class="sidebar-heading">-->
+<!--                    <h2>filter</h2> -->
+<!--                </div>-->
+
+<!--                <div class="box-container">-->
+
+<!--                    <div class="slider">-->
+<!--                        <div class="progress"></div>-->
+<!--                    </div>-->
+
+<!--                    <div class="range-input">-->
+<!--                        <input type="range" name="range_min" class="range-min" min="100" max="5000" value="100" step="10">-->
+<!--                        <input type="range" name="range_max" class="range-max" min="100" max="5000" value="5000" step="10">-->
+<!--                    </div>-->
+
+<!--                    <div class="price-wrap">-->
+<!--                        <div class="price-input">-->
+<!--                            <div class="field">-->
+<!--                                <span>INR</span>-->
+<!--                                <input type="number" class="input-min" value="100">-->
+<!--                            </div>-->
+<!--                            <div class="separator">-</div>-->
+<!--                            <div class="field">-->
+<!--                                <span>INR</span>-->
+<!--                                <input type="number" class="input-max" value="5000">-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <span class="filter-btn">FILTER</span>-->
+<!--                    </div>-->
+
+<!--                </div>-->
+
+<!--            </div>-->
+
+        </div>
+        <!-- ========== Shop Sidebar Area (End) ========== -->
+
+
+
+        <!-- ========== Shop Container (Start) ========== -->
+        <div class="shop-container">
+
+            <div class="intro">
+<!--                <div class="showing">-->
+<!--&lt;!&ndash;                    showing 4 of 20 products&ndash;&gt;-->
+<!--                </div>-->
+                <div class="styles">
+                    <a id="grid-view" href="javascript:void(0)" class="fas fa-th"></a>
+                    <a id="list-view" href="javascript:void(0)" class="fas fa-list active"></a>
+                </div>
+                <div class="sorting-type">
+                    <label for="sort">sort by:</label>
+
+                    <select name="sort" id="sort">
+                        <option value="default,default">default</option>
+                        <option value="name,asc">name, A to Z</option>
+                        <option value="name,desc">name, Z to A</option>
+                        <option value="price,asc">price, low to high</option>
+                        <option value="price,desc">price, high to low</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="product-container list">
+                {% for product in products %}
+                <div class="product-item"> 
+                    <div class="image">
+                        <div class="options">
+                            <a href="{% url 'add-to-cart' product.id %}"><i class="fas fa-cart-plus"></i></a>
+                            <a href="{% url 'add-to-wishlist' product.id %}"><i class="far fa-heart"></i></a>
+                            <a href="{% url 'product-details' product.slug %}"><i class="far fa-eye"></i></a>
+                        </div>
+                        {% if product.photos.values %}
+                        <img src="{% static product|get_image %}" alt="">
+                        {% else %}
+                        <img src="{% static 'assets/images/default.jpg' %}" alt="no-image">
+                        {% endif %}
+                    </div>
+                    <div class="content">
+                        <a href="{% url 'product-details' product.slug %}"><h3>{{product.title|title}}</h3></a>
+                        <p>{{product.description|safe}}</p>
+                        <div class="price">
+                            <p>{{product.price|get_price:product.category.discount}} <span>{{product.price}}</span></p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="product-container grid">
+                {% for product in products %}
+                <div class="product-item">
+                    <div class="image">
+                        <div class="options">
+                            <a href="{% url 'add-to-cart' product.id %}"><i class="fas fa-cart-plus"></i></a>
+                            <a href="{% url 'add-to-wishlist' product.id %}"><i class="far fa-heart"></i></a>
+                            <a href="{% url 'product-details' product.slug %}"><i class="far fa-eye"></i></a>
+                        </div>
+                        {% if product.photos.values %}
+                        <img src="{% static product|get_image %}" alt="">
+                        {% else %}
+                        <img src="{% static 'assets/images/default.jpg' %}" alt="no-image">
+                        {% endif %}
+                    </div>
+                    <div class="content">
+                        <a href="{% url 'product-details' product.slug %}"><h3>{{product.title|title}}</h3></a>
+                        <div class="price">
+                            <p>{{product.price|get_price:product.category.discount}} <span>{{product.price}}</span></p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+
+<!--            <div class="pages-no">-->
+<!--                <div class="container">-->
+<!--                    <div class="item">-->
+<!--                        <i class="fas fa-arrow-left"></i>-->
+<!--                    </div>-->
+<!--                    <div class="numbers">-->
+<!--                        <div class="item active">1</div>-->
+<!--                        <div class="item">2</div>-->
+<!--                        <div class="item">3</div>-->
+<!--                    </div>-->
+<!--                    <div class="item">-->
+<!--                        <i class="fas fa-arrow-right"></i>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--            </div>-->
+            
+        </div>
+        <!-- ========== Shop Container (End) ========== --> 
+
+    </section>
+    <!-- ==================== Shop-List Area (End) ==================== -->
+
+    <script src="{% static 'assets/js/Price-Filter.js' %}"></script>
+
+{% endblock %}

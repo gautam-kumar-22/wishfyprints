@@ -1,0 +1,84 @@
+{% extends 'includes/base.html' %}
+{% load static %}
+{% load template_tags %}
+{% block content %}
+  <!-- ==================== Page-Title (Start) ==================== -->
+  <div class="page-title">
+
+    <div class="title">
+      <h2>Wishlist</h2>
+    </div>
+
+    <div class="link">
+      <a href="{% url 'home' %}" class="fas fa-home"></a>
+      <i class="fas fa-arrow-right"></i>
+      <span class="page">Wishlist</span>
+    </div>
+
+  </div>
+  <!-- ==================== Page-Title (End) ==================== -->
+
+
+
+  <!-- ==================== Wishlist Area (Start) ==================== -->
+  <section>
+
+    <div class="wishlist">
+      {% for message in messages %}
+        <p class="messages alert alert-success" style="text-align: center;">  {{message}} </p>
+        {% endfor %}
+
+      <div class="container">
+        {% if wishlists %}
+        <div class="shoplist-title">
+          <h3 class="product-heading">product</h3>
+          <h3>price</h3>
+          <h3>status</h3>
+          <h3>activity</h3>
+        </div>
+
+        <div class="box-container">
+            {% for wish in wishlists %}
+          <div class="wishlist-item">
+            <div class="box product">
+              {% if wish.product.photos.values %}
+              <a href="{% url 'product-details' wish.product.slug %}">
+                <img src="{% static wish.product|get_image %}" alt="">
+              </a>
+                {% else %}
+                <img src="{% static 'assets/images/default.jpg' %}" alt="no-image">
+                {% endif %}
+              <a href="{% url 'product-details' wish.product.slug %}">
+                <div class="name">{{wish.product.title|title}}</div>
+              </a>
+            </div>
+            <div class="box price">
+              <p>{{wish.product.price|get_price:wish.product.category.discount}}
+                <span style="text-decoration: line-through;color: red;">{{wish.product.price}}</span></p>
+            </div>
+            {% if wish.product.category.available_quantity > 0%}
+            <div class="box status in">inStock</div>
+            {% else %}
+            <div class="box status out">Out Of Stock</div>
+            {% endif %}
+            <div class="box action">
+                <a href="{% url 'delete-wishlists' wish.id %}" class="icon fas fa-trash-alt delete-wishlists"></a>
+                <a href="{% url 'add-to-cart' wish.product.id %}" class="icon fas fa-shopping-cart"></a>
+            </div>
+          </div>
+            {% endfor %}
+        </div>
+        {% else %}
+          <div class="heading" style="min-height: 400px;">
+            <h2>No Item in your wishlist</h2>
+            <h2><a style="color: var(--main-color)" href="{% url 'products' %}">Continue Shopping</a></h2>
+          </div>
+        {% endif %}
+      </div>
+
+    </div>
+
+  </section>
+  <!-- ==================== Wishlist Area (End) ==================== -->
+
+{% endblock %}

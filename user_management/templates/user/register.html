@@ -1,0 +1,66 @@
+{% extends 'includes/base.html' %}
+{% load static %}
+{% load template_tags %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+  <!-- ==================== Page-Title (Start) ==================== -->
+<style>
+  label {
+    float: left;
+    font-size: 16px;
+    color: #FB2576;
+}
+ul {
+  text-align: left;
+  list-style-type: disc;
+  color: mediumvioletred;
+  font-size: 12px;
+  display: none;
+}
+.help-block {
+  color: mediumvioletred !important;
+  font-weight: normal !important;
+  font-size: 14px !important;
+  padding: 5px !important;
+}
+</style>
+  <div class="page-title">
+
+    <div class="title">
+      <h2>register</h2>
+    </div> 
+
+    <div class="link">
+      <a href="{% url 'home' %}" class="fas fa-home"></a>
+      <i class="fas fa-arrow-right"></i>
+      <span class="page">register</span>
+    </div>
+
+  </div>
+  <!-- ==================== Page-Title (End) ==================== -->
+    
+
+     
+  <!-- ==================== Register Area (Start) ==================== -->
+  <section class="register">
+    <form class="form" action="{% url 'register' %}" method="post" autocomplete="off">
+      <h3>register</h3>
+      {% if form.errors %} {{form.errors}} {% endif %}
+      {% csrf_token %}
+      {{form|crispy}}
+<!--      <input type="text" name="name" placeholder="enter your name" id="name" class="box">-->
+<!--      <input type="email" name="email" placeholder="enter your email" id="email" class="box">-->
+<!--      <input type="password" name="password" placeholder="enter your password" id="password" class="box">-->
+<!--      <input type="password" name="repeat-password" placeholder="repeat your password" id="repeat-password" class="box">-->
+<!--      <div class="terms">-->
+<!--        <input type="checkbox" name="remember-me" id="remember-me">-->
+<!--        <label for="remember-me"> i agree with the <span>terms & conditions</span> </label>-->
+<!--      </div>-->
+      <button type="submit" class="btn" name="register" id="register">register</button>
+      <p>already have an account? <a class="link" href="{% url 'login' %}">login</a></p>
+    </form>
+  
+  </section>
+  <!-- ==================== Register Area (End) ==================== -->
+{% endblock %}

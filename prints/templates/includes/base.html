@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Title -->
+  <title>Wishfy.in | Print Shop</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="{% static 'assets/images/favicon.ico' %}">
+
+    <!-- CSS ============================================ -->
+    {% include 'includes/css.html' %}
+    {{ form.media }}
+</head>
+<body>
+
+  <!-- ==================== Scroll-Top Area (Start) ==================== -->
+  <a href="#" class="scroll-top">
+    <i class="fas fa-long-arrow-alt-up"></i>
+  </a>
+  <!-- ==================== Scroll-Top Area (End) ==================== -->
+
+  <!-- ==================== Header Area ==================== -->
+  {% include 'includes/header.html' %}
+
+  {% block content %}
+  {% endblock %}
+
+  <!-- ==================== Footer Area (Start) ==================== -->
+  {% include 'includes/footer.html' %}
+
+
+<!-- =========== JS AREA ============= -->
+  {% include 'includes/js.html' %}
+
+</body>
+</html>

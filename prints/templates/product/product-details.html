@@ -1,0 +1,282 @@
+{% extends 'includes/base.html' %}
+{% load static %}
+{% load template_tags %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'assets/css/starability-all.min.css' %}"/>
+  <!-- ==================== Product-Details Area (Start) ==================== -->
+  <section class="product-details">
+
+    <!-- ========== Product-Description Area (Start) ========== -->
+    <div class="product-des">
+
+      <div class="box-container">
+    <!--start-->
+    <div style="display:none;">
+        <div id="ninja-slider">
+            <div class="slider-inner">
+                <ul>
+                  {% if product_details.photos.values %}
+                  {% for photo in product_details.photos.values %}
+                    <li>
+                        <a class="ns-img" href="{{photo|get_photo_from_photos}}"></a>
+                        <div class="caption">
+                            <h3>{{product_details.title}}</h3>
+                        </div>
+                    </li>
+                  {% endfor %}
+                  {% endif %}
+                </ul>
+                <div id="fsBtn" class="fs-icon" title="Expand/Close"></div>
+            </div>
+        </div>
+    </div>
+
+        <div class="image">
+          <div class="image-container">
+            <div class="main">
+              {% if product_details.photos.values %}
+              <img src="{% static product_details|get_image %}" alt="" style="object-fit: none;" onclick="lightbox(0)">
+              {% else %}
+              <img src="{% static 'assets/images/default.jpg' %}" alt="no-image">
+              {% endif %}
+            </div>
+            <div class="change-btns">
+              {% if product_details.photos.values %}
+              <img class="active" src="{% static product_details|get_image %}" alt="" style="height:150px; width: 150px">
+              {% for photo in product_details.photos.values %}
+                {% if photo|get_photo_from_photos != product_details|get_image %}
+                  <img src="{{photo|get_photo_from_photos}}" alt="" style="height:150px; width: 150px">
+                {% endif %}
+              {% endfor %}
+              {% endif %}
+            </div>
+          </div>
+        </div>
+
+        <div class="content">
+          <div class="text">
+
+            <h3>{{product_details.title}}</h3>
+
+            <div class="price">{{product_details.price|get_price:product_details.category.discount}}/- <span>{{product_details.price}}</span></div>
+            {% if reviews %}
+            <div class="intro">
+              <div class="rating">
+                <fieldset class="starability-basic">
+                {% for star in reviews|avgrating %}
+                      <label>{{star}} star.</label>
+                  {% endfor %}
+                </fieldset>
+              </div>
+              <span>({{reviews|length}}) reviews</span>
+            </div>
+            {% endif %}
+            <p>{{product_details.about|safe}}</p>
+            <form method="post" action="{% url 'add-to-carts' %}">
+              {% csrf_token %}
+            <div class='qty'>
+              <h4>Quantity:</h4>
+              <div class="quantity buttons_added">
+                <input type="button" value="-" class="minus">
+                <input type="number" step="1" min="1" max="5" name="quantity" value="1" title="Qty" class="input-text qty text">
+                <input type="button" value="+" class="plus">
+              </div>
+            </div>
+            <input type="hidden" name="product_id" value="{{product_details.id}}">
+            <button type="submit" class="btn"> add to cart </button>
+            </form>
+            <div class='categories'>
+              <h4>Categories:</h4>
+              <span>{{product_details.category}}</span>
+            </div>
+
+            <div class='tags'>
+              <h4>Tags:</h4>
+              {% for tag in product_details.tag|get_tags %}
+              <span>{{tag}}</span>
+              {% endfor %}
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+
+      <div class="product-info">
+
+        <div class="product-info-tabs">
+          <button type="button" class="info-btn active" data-target="#description">description</button>
+          <button type="button" class="info-btn" data-target="#additional">additional information</button>
+          <button type="button" class="info-btn" data-target="#reviews">reviews ({{reviews|length}})</button>
+        </div>
+
+        <div class="product-info-gallery active" id="description">
+          <div class="description">
+            <p>{{product_details.description|safe}}</p>
+          </div>
+        </div>
+
+        <div class="product-info-gallery" id="additional">
+
+          <div class="additional-info">
+            {% for info in product_details.additional_information.values %}
+            <div class="item"><h3>{{info.field}}:</h3><span>{{info.value}}</span></div>
+            {% endfor %}
+          </div>
+
+        </div>
+
+        <div class="product-info-gallery" id="reviews">
+
+          <div class="reviews">
+
+            <h2>{{reviews|length}} reviews</h2>
+            {% for review in reviews %}
+            <div class="review-item">
+              <div class="review-image">
+                <img src="{% static 'assets/images/Shop/Comments/pic-1.png' %}" alt="">
+              </div>
+              <div class="review-content">
+                <div class="intro">
+                  <h3>{{review.user.first_name}} {{review.user.last_name}}
+                    <fieldset class="starability-basic" style="float: right; margin-left: 20px;">
+                      <legend></legend>
+                      {% for star in review.rating|myrange %}
+                          <label>{{star}} star.</label>
+                      {% endfor %}
+                    </fieldset>
+                  </h3>
+                  <h6><i class="far fa-calendar-alt"></i>{{review.created_on}}</h6>
+                </div>
+                <p class="text">{{review.comment}}</p>
+<!--                <div class='icon-item'><i class="fas fa-reply"></i><span>reply</span></div>-->
+              </div>
+            </div>
+            {% endfor %}
+
+          </div>
+          {% if user.is_authenticated %}
+          <div class="leave-reply" style="width: 80%">
+            <form action="#" method="post">
+              {% csrf_token %}
+              <h2>leave a comment</h2>
+              <p class="messages" id="alert-success" style="text-align: center;background: lightgreen;padding: 7px;color: #000;font-size: 14px;"></p>
+              <fieldset class="starability-basic">
+                <legend><p style="font-size: 16px;">Give your rating:</p></legend>
+                <input type="radio" id="no-rate" class="input-no-rate" name="rating" value="0" aria-label="No rating." />
+
+                <input type="radio" id="rate1" name="rating" value="1" />
+                <label for="rate1">1 star.</label>
+
+                <input type="radio" id="rate2" name="rating" value="2" />
+                <label for="rate2">2 stars.</label>
+
+                <input type="radio" id="rate3" name="rating" value="3" />
+                <label for="rate3">3 stars.</label>
+
+                <input type="radio" id="rate4" name="rating" value="4" />
+                <label for="rate4">4 stars.</label>
+
+                <input type="radio" id="rate5" name="rating" value="5" checked />
+                <label for="rate5">5 stars.</label>
+
+                <span class="starability-focus-ring"></span>
+              </fieldset>
+              <textarea cols="30" rows="10" name="comment" class="box" id="comment" placeholder="comment"></textarea>
+              <input type="button" value="submit" id="submit-review" class="btn">
+            </form>
+          </div>
+          {% else %}
+          <p class="text" style="font-size: 16px;">Please <a href="{% url 'login' %}" style="color: var(--main-color)"> login </a> to post your reviews/reply.</p>
+          {% endif %}
+        </div>
+
+      </div>
+
+    </div>
+    <!-- ========== Product-Description Area (End) ========== -->
+
+
+
+    <!-- ========== Related Products Area (Start) ========== -->
+    <div class="related-items">
+
+      <div class="sidebar-heading">
+        <h2>Related Products</h2>
+      </div>
+
+      <div class="box-container">
+        {% for similar in similar_products %}
+        <div class="product-item">
+          <div class="image">
+            <div class="options">
+              <a href="{% url 'add-to-cart' similar.id %}"><i class="fas fa-cart-plus"></i></a>
+              <a href="{% url 'add-to-wishlist' similar.id %}"><i class="far fa-heart"></i></a>
+              <a href="{% url 'product-details' similar.slug %}"><i class="far fa-eye"></i></a>
+            </div>
+            {% if similar.photos.values %}
+            <img src="{% static similar|get_image %}" alt="">
+            {% else %}
+            <img src="{% static 'assets/images/default.jpg' %}" alt="no-image">
+            {% endif %}
+          </div>
+          <div class="content">
+            <a href="{% url 'product-details' similar.slug %}"><h3>{{similar.title}}</h3></a>
+            <div class="price">
+              <p>{{similar.price|get_price:similar.category.discount}} <span>{{similar.price}}</span></p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    <!-- ========== Related Products Area (End) ========== -->
+
+  </section>
+  <!-- ==================== Product-Details Area (End) ==================== -->
+<script src="{% static 'assets/js/product-info.js' %}"></script>
+<script>
+    function lightbox(idx) {
+        //show the slider's wrapper: this is required when the transitionType has been set to "slide" in the ninja-slider.js
+        var ninjaSldr = document.getElementById("ninja-slider");
+        ninjaSldr.parentNode.style.display = "block";
+
+        nslider.init(idx);
+
+        var fsBtn = document.getElementById("fsBtn");
+        fsBtn.click();
+    }
+
+    function fsIconClick(isFullscreen, ninjaSldr) { //fsIconClick is the default event handler of the fullscreen button
+        if (isFullscreen) {
+            ninjaSldr.parentNode.style.display = "none";
+        }
+    }
+</script>
+<script src="{% static 'assets/vendors/jquery/jquery-3.6.0.js' %}"></script>
+<script>
+// Review system management
+  $(document).ready(function(){
+    $("#alert-success").hide();
+    $("#submit-review").click(function(){
+        $.post("{% url 'product-review' %}",
+        {
+          rating: $("input[name=rating]:checked").val(),
+          comments: $("#comment").val(),
+          product_id: "{{product_details.id}}",
+          csrfmiddlewaretoken: '{{ csrf_token }}'
+        },
+        function(data,status){
+          if(status=="success"){
+            $("#alert-success").text(data.message);
+            $("#comment").val("");
+            $("#alert-success").show();
+            $("#alert-success").fadeTo(5000, 500).slideUp(500, function() {
+                $("#alert-success").slideUp(500);
+            });
+          }
+        });
+    });
+  });
+</script>
+{% endblock %}

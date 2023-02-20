@@ -1,0 +1,44 @@
+{% extends 'includes/base.html' %}
+{% load static %}
+
+{% block content %}
+  <!-- ==================== Page-Title (Start) ==================== -->
+  <div class="page-title">
+
+    <div class="title">
+      <h2>Services</h2>
+    </div> 
+
+    <div class="link">
+      <a href="{% url 'home' %}" class="fas fa-home"></a>
+      <i class="fas fa-arrow-right"></i>
+      <span class="page">Services</span>
+    </div>
+
+  </div>
+  <!-- ==================== Page-Title (End) ==================== -->
+
+
+ 
+  <!-- ==================== Services Area (Start) ==================== -->
+  <section class="services">
+
+    <div class="box-container">
+
+      {% for service in services %}
+      <div class="service-item">
+        <div class="image">
+          <img src="{{service.image.url}}" alt="Service-Image">
+        </div>
+        <div class="content">
+          <a href="{% url 'service-detail' service.slug %}"><h3>{{service.title}}</h3></a>
+<!--          <p>{{service.description|safe}}</p>-->
+        </div>
+      </div>
+      {% endfor %}
+
+    </div>
+
+  </section>
+  <!-- ==================== Services Area (End) ==================== -->
+{% endblock %}

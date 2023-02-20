@@ -1,0 +1,213 @@
+/*--------------------- Responsive (Start) ---------------------*/
+@media (max-width: 991px){
+
+    html{
+        font-size: 55%;
+    }
+
+    .header .header-contacts{
+        display: none;
+    }
+
+    .header .navbar{
+        display: none;
+    }
+
+    .header #menu-btn{
+        display: initial;
+    }
+
+    .mobile-menu { 
+        display: block;
+        position: fixed;
+        top: 0; 
+        left: -110%; 
+        height: 100%;
+        width: 30rem;
+        z-index: 10000;
+        overflow-y: auto; 
+        max-height: 100%;
+        background: var(--white);
+        -webkit-transition: all 0.5s ease-in-out;
+        -moz-transition: all 0.5s ease-in-out;
+        -o-transition: all 0.5s ease-in-out;
+        transition: all 0.5s ease-in-out;
+        border: 0.1rem solid var(--main-color);
+        -webkit-box-shadow: var(--box-shadow);
+                box-shadow: var(--box-shadow);
+    } 
+
+    .mobile-menu.active {
+        left: 0;
+    }
+    
+    .mobile-menu #close-side-bar {
+        position: absolute;
+        top: 1rem;
+        right: 2rem;
+        font-size: 4rem;
+        cursor: pointer;
+        color: var(--grey);
+    }
+    
+    .mobile-menu #close-side-bar:hover {
+        -webkit-transform: rotate(90deg);
+                transform: rotate(90deg);
+        color: var(--secondary-color);
+    }
+    
+    .mobile-menu .mobile-navbar {
+        padding-top: 8rem;
+    } 
+
+    .mobile-navbar .main-nav-link{
+        border-bottom: 0.2rem solid rgba(0, 0, 0, 0.2);
+        background-color: var(--white);
+        color: var(--black);
+        font-size: 2rem;
+        font-weight: bold;
+        cursor: pointer; 
+        width: 100%;
+        padding: 2rem 1rem;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify; 
+        justify-content: space-between; 
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+    }
+
+    .mobile-navbar .main-nav-link a{
+        color: var(--black);
+    }
+
+    .mobile-navbar .main-nav-link:hover,
+    .mobile-navbar .main-nav-link.active{
+        color: var(--main-color);
+        border-color: var(--main-color);
+    }
+    
+    .mobile-navbar .sub-nav-link {
+        padding-left: 2rem;
+        padding-bottom: 1rem;
+        background: rgba(251, 37, 118, 0.1);
+        display: none;
+        -webkit-transition: all 0s;
+        -moz-transition: all 0s;
+        -o-transition: all 0s;
+        transition: all 0s;
+    }
+    
+    .mobile-navbar .sub-nav-link a{
+        color: var(--black);
+        display: block;
+        padding: 1rem 0rem;
+        font-size: 1.8rem;
+        font-weight: 400;
+        border-bottom: 0.1rem solid var(--black);
+    }
+    
+    .mobile-navbar .sub-nav-link a:hover{
+        color: var(--main-color);
+        border-color: var(--main-color);
+    }
+    
+    .mobile-menu::-webkit-scrollbar{
+        width: 0.8rem; 
+    }
+    
+    .mobile-menu::-webkit-scrollbar-thumb{
+        border-radius: 1rem;
+        background-color: var(--black);
+    }
+    
+    .mobile-menu::-webkit-scrollbar-track{
+        background: var(--white);
+    }
+
+    .blog.grid, .blog.list{
+        -ms-flex-wrap: wrap-reverse;
+            flex-wrap: wrap-reverse;
+    }
+    
+}
+
+@media (max-width: 768px){
+
+    section, .header .header-1, .header .header-2{
+        padding: 2rem;
+    }
+
+    .footer{
+        padding: 0rem 2rem;
+    }
+
+    .home-item .content{ 
+        padding: 2rem 10%;
+    }
+
+    .about .box-container{
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+        padding: 2rem;
+        background: var(--main-color);
+    }
+
+    .shop{
+        -ms-flex-wrap: wrap-reverse;
+            flex-wrap: wrap-reverse;
+    }
+    
+}
+
+@media (max-width: 450px){
+    
+    html{
+      font-size: 50%;
+    }
+
+    section, .header .header-1, .header .header-2{
+        padding: 1rem;
+    }
+
+    .footer{
+        padding: 0rem 1rem;
+    }
+
+    .home-item .content{ 
+        padding: 2rem 14%;
+    }
+
+    .contact-form .input-box{
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+    }
+
+    .form .input-box .box{
+        width: 100%;
+    }
+
+    .cart .cart-summary{
+        width: 100%;
+    }
+
+    .order-details .order-summary{
+        width: 100%;
+    }
+
+    .leave-reply form .input-box .box{
+        width: 100%;
+    }
+
+    .edit-address form .box {
+        width: 100%;
+    }
+    
+}
+
+/*--------------------- Responsive (End) ---------------------*/
+
+

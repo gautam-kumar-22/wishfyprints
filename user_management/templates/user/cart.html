@@ -1,0 +1,136 @@
+{% extends 'includes/base.html' %}
+{% load static %}
+{% load template_tags %}
+{% block content %}
+    <!-- ==================== Page-Title (Start) ==================== -->
+    <div class="page-title">
+
+        <div class="title">
+            <h2>Cart</h2>
+        </div> 
+   
+        <div class="link">
+            <a href="{% url 'home' %}" class="fas fa-home"></a>
+            <i class="fas fa-arrow-right"></i>
+            <span class="page">Cart</span>
+        </div>
+  
+    </div>
+    <!-- ==================== Page-Title (End) ==================== -->
+
+    <!-- ==================== Cart Area (Start) ==================== -->
+    <section class="cart">
+        {% for message in messages %}
+        <p class="messages alert alert-success" style="text-align: center;">  {{message}} </p>
+        {% endfor %}
+        <!-- ========== Shopping-Cart Area (Start) ========== -->
+        <div class="shopping-cart">
+
+            <div class='container'>
+                {% if carts %}
+                <div class="shoplist-title">
+                    <h3 class="product-heading">product</h3>
+                    <h3>price</h3>
+                    <h3>quantity</h3>
+                    <h3>total</h3>
+                    <h3>action</h3>
+                </div>
+
+                <div class="box-container"> 
+                    {% for cart in carts %}
+                    <div class="cart-item">
+                        <div class="box product">
+
+                            {% if cart.product.photos.values %}
+                            <a href="{% url 'product-details' cart.product.slug %}">
+                                <img src="{% static cart.product|get_image %}" alt="">
+                            </a>
+                              {% else %}
+                                <img src="Media/default.jpg" alt="">
+                              {% endif %}
+
+                            <div class="name"><a href="{% url 'product-details' cart.product.slug %}"> {{cart.product.title}}</a></div>
+                        </div>
+                        <div class="box price">
+                            <p>{{cart.product.price|get_price:cart.product.category.discount}}
+                                <span style="text-decoration: line-through">{{cart.product.price}}</span></p>
+                        </div>
+                        <div class="box  quantitly">
+                            <div class="quantity buttons_added" style="width: 16rem">
+                                <form method="post" action="{% url 'add-to-carts' %}" style="font-family: none; display: contents;">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="product_id" value="{{cart.product.id}}">
+                                    <input type="button" value="-" class="minus">
+                                    <input type="number" step="1" min="1" max="10" name="quantity" value="{{cart.quantity}}" title="Qty" class="input-text qty text">
+                                    <input type="button" value="+" class="plus">
+                                    <button type="submit">
+                                        <i style="font-size: 20px;color: seagreen;cursor: pointer;" class="fa">&#xf021;</i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="box total">{% multiply cart.product.price|get_price:cart.product.category.discount cart.quantity %}</div>
+                        <div class="box action">
+                            <a href="{% url 'delete-cart' cart.id %}" class="icon fas fa-trash-alt delete-cart"></a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                  <div class="heading" style="min-height: 400px;">
+                    <h2>No Item in your Cart</h2>
+                      <h2><a style="color: var(--main-color)" href="{% url 'products' %}">Continue Shopping</a></h2>
+                  </div>
+                {% endif %}
+
+            </div>
+            
+        </div>
+        <!-- ========== Shopping-Cart Area (End) ========== -->
+
+
+
+        <!-- ========== Cart-Summary Area (Start) ========== -->
+        <div class="cart-summary">
+            {% if carts %}
+            <div class="summary-list">
+
+                <div class="summary-item">
+                    <div class="name box">sub total</div>
+                    <div class="value box">{% cart_sub_total carts %}</div>
+                </div>
+
+<!--                <div class="summary-item">-->
+<!--                    <div class="name box">delivery fee</div>-->
+<!--                    <div class="value box">$50.00</div>-->
+<!--                </div>-->
+
+                <div class="summary-item">
+                    <div class="name box">discount</div>
+                    <div class="value box">{% cart_total_discount carts %}</div>
+                </div>
+ 
+<!--                <div class="summary-item">-->
+<!--                    <div class="name box">tax</div>-->
+<!--                    <div class="value box">$20.00</div>-->
+<!--                </div> -->
+
+                <div class="summary-item"> 
+                    <div class="name box">total</div>
+                    <div class="value box">{% cart_total carts %}</div>
+                </div>
+
+            </div>
+
+            <a href="{% url 'checkout-process' %}" class="btn">proceed to checkout</a>
+            {% endif %}
+        </div>
+        <!-- ========== Cart-Summary Area (End) ========== -->
+
+
+    </section>
+    <!-- ==================== Cart Area (End) ==================== -->
+
+
+    <script src="{% static 'assets/js/quantity.js' %}"></script>
+{% endblock %}

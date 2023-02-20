@@ -1,0 +1,95 @@
+{% extends 'includes/base.html' %}
+{% load static %}
+{% load template_tags %}
+{% block content %}
+  <!-- ==================== Page-Title (Start) ==================== -->
+  <div class="page-title">
+
+    <div class="title">
+      <h2>Profile</h2>
+    </div> 
+
+    <div class="link">
+      <a href="{% url 'home' %}" class="fas fa-home"></a>
+      <i class="fas fa-arrow-right"></i>
+      <span class="page">Profile</span>
+    </div>
+
+  </div>
+  <!-- ==================== Page-Title (End) ==================== -->
+  
+
+
+  <!-- ==================== Profile Area (Start) ==================== -->
+  <section class="profile">
+
+    <div class="box-container">
+
+      <!-- ========== Profile-Pic Area (Start) ========== -->
+      <div class="image">
+        <img src="{{user_profile.0.image}}" alt="">
+      </div>
+      <!-- ========== Profile-Pic Area (End) ========== -->
+  
+      <!-- ========== Profile-Details Area (Start) ========== -->
+      <div class="profile-item profile-details"> 
+  
+        <div class="info">
+          <h3>{{user.first_name}} {{user.last_name}}</h3>
+          <div class="container">
+            <div class="box"><i class="fas fa-envelope"></i><span class="gmail">{{user.email}}</span></div>
+            <div class="box"><i class="fas fa-mobile-alt"></i><span>{{user_profile.0.contact_number}}</span></div>
+            <div class="box"><i class="fas fa-map-marker-alt"></i><span>{{user_contact.0.primary_address}}</span></div>
+          </div>
+          <a href="{% url 'edit-profile' %}" class="btn">edit profile</a>
+        </div> 
+  
+      </div>
+      <!-- ========== Profile-Details Area (End) ========== -->
+  
+      <!-- ========== Address-Details Area (Start) ========== -->
+      <div class="profile-item address-details">
+  
+        <div class="content">
+  
+          <div class="address-container">
+  
+            <div class="shipping address">
+              <div class="title"><h3>shipping address</h3></div>
+              <div class="info">
+                <p><span>{{shipping_address.0.first_name|title}} {{shipping_address.0.last_name|title}}</span></p>
+                <p><span>city:</span> {{shipping_address.0.city|title}}</p>
+                <p><span>province:</span> {{shipping_address.0.state|title}}</p>
+                <p><span>ZIP:</span> {{shipping_address.0.pin_code}}</p>
+                <p><span>address:</span>{{shipping_address.0.primary_address|title}} <br>
+                  {{shipping_address.0.primary_address2|title}}
+                </p>
+              </div>
+            </div> 
+  
+            <div class="billing address">
+              <div class="title"><h3>billing address</h3></div>
+              <div class="info">
+                <p><span>{{billing_address.0.first_name|title}} {{billing_address.0.last_name|title}}</span></p>
+                <p><span>city:</span> {{billing_address.0.city|title}}</p>
+                <p><span>province:</span> {{billing_address.0.state|title}}</p>
+                <p><span>ZIP:</span> {{billing_address.0.pin_code}}</p>
+                <p><span>address:</span>{{billing_address.0.primary_address|title}} <br>
+                  {{billing_address.0.primary_address2|title}}
+              </div>
+            </div>
+  
+          </div>
+  
+          <a href="{% url 'edit-address' %}" class="btn">edit address</a>
+  
+        </div>
+  
+      </div>
+      <!-- ========== Address-Details Area (End) ========== -->
+
+    </div>
+
+  </section>
+  <!-- ==================== Profile Area (End) ==================== -->
+{% endblock %}

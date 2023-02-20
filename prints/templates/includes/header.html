@@ -1,0 +1,119 @@
+{% load static %}
+<!-- ==================== Header Area (Start) ==================== -->
+<header>
+<div class="holder">
+  <div class="news"><i>This website is under maintenance.... We are sorry for your inconvenience.</i></div>
+</div>
+<!-- ===== Header Area (Start) ===== -->
+<div class="header">
+
+  <div class="header-1">
+
+    <!-- Logo -->
+    <a class="logo" href="{% url 'home' %}">
+      <img src="{% static 'assets/images/Logo/Logo.png' %}" alt="logo">
+    </a>
+
+    <ul class="header-contacts">
+
+      <li>
+        <i class="fas fa-envelope"></i>
+        <div class="text">
+          <h6>email:</h6>
+          <span class="gmail">{{contacts.info_email}}</span>
+        </div>
+      </li>
+
+      <li>
+        <i class="fas fa-phone"></i>
+        <div class="text">
+          <h6>phone:</h6>
+          <span>{{contacts.phone_number}}</span>,
+          <span>{{contacts.mobile_number}}</span>
+        </div>
+      </li>
+
+      <li>
+        <i class="fas fa-map"></i>
+        <div class="text">
+          <h6>address:</h6>
+          <span>
+            <a style="color: var(--grey);" href="https://www.google.com/maps/place/Wishfy+Prints/@24.5106484,84.6687226,18z/data=!4m5!3m4!1s0x398cc18b0508a045:0xced615cc10331f69!8m2!3d24.5104651!4d84.6684712" target="_blank">
+            {{contacts.address}}, {{contacts.city}}, {{contacts.state}}, {{contacts.country}},
+            {{contacts.pin_code}}
+            </a>
+          </span>
+        </div>
+      </li>
+
+    </ul>
+
+    <a href="{% url 'contact-us' %}" class="btn">get quote</a>
+
+  </div>
+
+  <div class="header-2">
+
+    <!-- Navbar -->
+    <!-- ===== Menu Area (Start) ===== -->
+    {% include 'includes/menu.html' %}
+
+    <div id="menu-btn" class="icon fas fa-bars"></div>
+
+    <div class="icon-container">
+      {% if user.is_authenticated %}
+      <div class="title" style="color: #fff;"><h2>Welcome! &nbsp;&nbsp; {{user.username}}</h2></div>
+      <div class="dropdown-menu">
+        <a class="icon far fa-user"></a>
+        <div class="dropdown-content"  style="right: 0; !important; left: UNSET !important;">
+          <a href="{% url 'profile' %}">Profile</a>
+          <a href="{% url 'order-history' %}">My Orders</a>
+          <a href="{% url 'logout' %}">Logout</a>
+        </div>
+      </div>
+      {% else %}
+        <a href="{% url 'login' %}" id="login" class="icon far fa-user"></a>
+      {% endif %}
+      <a style="font-size: 3em; margin-top: -15px;" href="{% url 'cart' %}" id="cart" class="icon fas fa-cart-arrow-down overlay">
+        {% if carts %}
+         <p> {{carts|length}} </p>
+          {% endif %}
+      </a>
+    </div>
+
+  </div>
+
+</div>
+<!-- ===== Header Area (Ends) ===== -->
+
+<!-- ===== Mobile Menu Area (Start) ===== -->
+{% include 'includes/mobile_menu.html' %}
+
+</header>
+<!-- ==================== Header Area (End) ==================== -->
+<style>
+
+.overlay p {
+  color: #47f197;
+  font-size: 18px;
+  font-family: Helvetica;
+  font-weight: 400;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.overlay p {
+  margin-top: -40px;
+  font-size: 13px;
+  color: black;
+  font-weight: bold;
+  margin-left: 30px;
+  background: #fff;
+  opacity: 99999999999;
+  z-index: 999999999999999;
+  position: relative;
+  border-radius: 50%;
+  padding: 5px;
+}
+
+</style>

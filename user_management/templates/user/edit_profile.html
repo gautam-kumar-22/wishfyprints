@@ -1,0 +1,45 @@
+{% extends 'includes/base.html' %}
+{% load static %}
+{% load template_tags %}
+{% block content %}
+
+  <!-- ==================== Page-Title (Start) ==================== -->
+  <div class="page-title">
+
+    <div class="title">
+      <h2>Edit Profile</h2>
+    </div> 
+
+    <div class="link">
+      <a href="../../index.html" class="fas fa-home"></a>
+      <i class="fas fa-arrow-right"></i>
+      <span class="page">Edit Profile</span>
+    </div>
+
+  </div>
+  <!-- ==================== Page-Title (End) ==================== -->
+  
+
+     
+  <!-- ==================== Edit Profile (Start) ==================== -->
+  <section class="edit-profile">
+
+    <form class="form" action="" method="post" enctype="multipart/form-data">
+      <h3>edit profile</h3>
+      {% csrf_token %}
+      <!-- ========== Profile-Pic Area (Start) ========== -->
+      <div class="image">
+        <img style="height: 200px;width: 200px;border-radius: 50%;" src="{{user_profile.0.image}}" alt="">
+      </div>
+      <!-- ========== Profile-Pic Area (End) ========== -->
+      <input type="text" name="first_name" placeholder="first name" id="first_name" class="box" value="{{user.first_name}}" required="True">
+      <input type="text" name="last_name" placeholder="last name" id="last_name" class="box" value="{{user.last_name}}" required="True">
+      <input type="email" name="email" placeholder="email address" id="email" class="box" value="{{user.email}}">
+      <input type="text" name="phone_number" placeholder="phone number" id="number" class="box" value="{{user_profile.0.contact_number}}">
+      <input type="file" name="profile_pic" id="profile-pic" accept="image/*" class="box">
+      <button type="submit" class="btn" name="edit-profile" id="edit-profile">Update</button>
+    </form>
+    
+  </section>
+  <!-- ==================== Edit Profile (End) ==================== -->
+{% endblock %}

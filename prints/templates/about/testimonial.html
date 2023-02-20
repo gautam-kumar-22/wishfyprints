@@ -1,0 +1,54 @@
+{% extends 'includes/base.html' %}
+{% load static %}
+{% load template_tags %}
+
+{% block content %}
+
+    <!-- ==================== Page-Title (Start) ==================== -->
+  <div class="page-title">
+
+    <div class="title">
+      <h2>testimonial</h2>
+    </div>
+
+    <div class="link">
+      <a href="{% url 'home' %}" class="fas fa-home"></a>
+      <i class="fas fa-arrow-right"></i>
+      <span class="page">testimonial</span>
+    </div>
+
+  </div>
+  <!-- ==================== Page-Title Area (End) ==================== -->
+
+
+  <!-- ==================== Testimonials Area (Start) ==================== -->
+  <section class="testimonial">
+
+    <div class="heading">  
+      <span>what our client's say</span>
+      <h2>our testimonials</h2>  
+    </div>
+  
+    <div class="swiper-container testimonial-slider">
+      <div class="swiper-wrapper">
+        {% for testimonial in testimonials %}
+        <div class="swiper-slide testi-item">
+          <img src="{{testimonial.image.url}}" alt="">
+          <i class="fas fa-quote-left"></i>
+          <p>{{testimonial.testimonial|safe}}</p>
+          <div class="text">
+            <h4>{{testimonial.name}}</h4>
+            <h6>{{testimonial.type}}</h6>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+      <div class="swiper-pagination swiper-pagination2"></div>
+
+    </div>
+  
+  </section>
+  <!-- ==================== Testimonials Area (End) ==================== -->
+
+{% endblock %}

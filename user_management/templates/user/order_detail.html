@@ -1,0 +1,168 @@
+{% extends 'includes/base.html' %}
+{% load static %}
+{% load template_tags %}
+{% block content %}
+
+  <!-- ==================== Page-Title (Start) ==================== -->
+  <div class="page-title">
+
+    <div class="title">
+      <h2>Order Details</h2>
+    </div>
+
+    <div class="link">
+      <a href="{% url 'home' %}" class="fas fa-home"></a>
+      <i class="fas fa-arrow-right"></i>
+      <span class="page">Order Details</span>
+    </div>
+
+  </div>
+  <!-- ==================== Page-Title (End) ==================== -->
+
+  <!-- ==================== Order-Details Area (Start) ==================== -->
+  <section class="order-details">
+
+    <!-- ========== Address-Details Area (Start) ========== -->
+    <div class="address-details order-details-item">
+
+      <div class="heading">
+        <h2>address details</h2>
+      </div>
+
+      <div class="box-container">
+        {{order_address}}
+        <div class="shipping address">
+          <div class="title"><h3>shipping address</h3></div>
+          <div class="info">
+            <p><span>{{order_shipping_address.0.address.first_name}} {{order_shipping_address.0.address.last_name}}</span></p>
+            <p><span>country:</span> {{order_shipping_address.0.address.country}}</p>
+            <p><span>city:</span> {{order_shipping_address.0.address.city}}</p>
+            <p><span>province:</span> {{order_shipping_address.0.address.state}}</p>
+            <p><span>ZIP:</span> {{order_shipping_address.0.address.pin_code}}</p>
+            <p><span>address:</span>{{order_shipping_address.0.address.primary_address}}
+              <br>{{order_shipping_address.0.address.primary_address2}}
+            </p>
+            <p><span>Landmark:</span> {{order_shipping_address.0.address.landmark}}</p>
+          </div>
+        </div>
+
+        <div class="billing address">
+          <div class="title"><h3>billing address</h3></div>
+          <div class="info">
+            <p><span>{{order_billing_address.0.address.first_name}} {{order_billing_address.0.address.last_name}}</span></p>
+            <p><span>country:</span> {{order_billing_address.0.address.country}}</p>
+            <p><span>city:</span> {{order_billing_address.0.address.city}}</p>
+            <p><span>province:</span> {{order_billing_address.0.address.state}}</p>
+            <p><span>ZIP:</span> {{order_billing_address.0.address.pin_code}}</p>
+            <p><span>address:</span>{{order_billing_address.0.address.primary_address}}
+              <br>{{order_billing_address.0.address.primary_address2}}
+            </p>
+            <p><span>Landmark:</span> {{order_billing_address.0.address.landmark}}</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    <!-- ========== Address-Details Area (End) ========== -->
+
+
+    <!-- ========== Order-Items Area (Start) ========== -->
+    <div class="order-items order-details-item">
+
+      <div class="container">
+
+        <div class="heading">
+          <h2>order items</h2>
+        </div>
+
+        <div class="shoplist-title">
+          <h3 class="product-heading">product</h3>
+          <h3>price</h3>
+          <h3>quantity</h3>
+          <h3>Discount</h3>
+          <h3>total</h3>
+        </div>
+
+        <div class="box-container">
+        {% for item in order_items %}
+          <div class="order-item">
+            <div class="box product">
+
+              {% if item.product.photos.values %}
+                <a href="{% url 'product-details' item.product.slug %}">
+                  <img src="{% static item.product|get_image %}" alt="">
+                </a>
+              {% else %}
+                <img src="Media/default.jpg" alt="">
+              {% endif %}
+
+              <div class="name">
+                <a href="{% url 'product-details' item.product.slug %}">{{item.product.title}}</a>
+              </div>
+            </div>
+            <div class="box price">{{item.price}}</div>
+            <div class="box quantitly">{{item.quantity}}</div>
+            <div class="box quantitly">{{item.discount}}</div>
+            <div class="box total">{{item.total}}</div>
+          </div>
+        {% endfor %}
+        </div>
+      </div>
+
+    </div>
+    <!-- ========== Order-Items Area (End) ========== -->
+
+
+    <!-- ========== Order-Summary Area (Start) ========== -->
+    <div class="order-summary order-details-item">
+
+      <div class="content">
+
+        <div class="heading">
+          <h2>order summary</h2>
+        </div>
+
+        <div class="order-intro">
+          <div class="order-id">#{{order_details.0.order_id}}</div>
+          <div class="delivery">{{order_details.0.created_on}}</div>
+        </div>
+
+        <div class="summary-list">
+
+          <div class="summary-item">
+            <div class="name box">sub total</div>
+            <div class="value box">{{order_details.0.subtotal}}</div>
+          </div>
+
+          <div class="summary-item">
+            <div class="name box">delivery fee</div>
+            <div class="value box">0.00</div>
+          </div>
+
+          <div class="summary-item">
+            <div class="name box">discount</div>
+            <div class="value box">{{order_details.0.discount}}</div>
+          </div>
+
+          <div class="summary-item">
+            <div class="name box">tax</div>
+            <div class="value box">0.00</div>
+          </div>
+
+          <div class="summary-item">
+            <div class="name box">total</div>
+            <div class="value box">{{order_details.0.total}}</div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+    <!-- ========== Order-Summary Area (End) ========== -->
+
+  </section>
+  <!-- ==================== Order-Details Area (End) ==================== -->
+
+{% endblock %}

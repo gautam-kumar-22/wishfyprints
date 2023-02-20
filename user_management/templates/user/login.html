@@ -1,0 +1,50 @@
+{% extends 'includes/base.html' %}
+{% load static %}
+{% load template_tags %}
+
+{% block content %}
+  <!-- ==================== Page-Title (Start) ==================== -->
+  <div class="page-title">
+    <div class="title">
+      <h2>login</h2>
+    </div>
+
+    <div class="link">
+      <a href="{% url 'home' %}" class="fas fa-home"></a>
+      <i class="fas fa-arrow-right"></i>
+      <span class="page">login</span>
+    </div>
+
+  </div>
+  <!-- ==================== Page-Title (End) ==================== -->
+
+  <!-- ==================== Login Area (Start) ==================== -->
+  <section class="login">
+    <form class="form" action="#">
+      <h3>login</h3>
+
+        <button class="btn btn-default  mb-2">
+            <a style="color: #fff;" href="{% url 'social:begin' 'google-oauth2' %}">Login with google</a>
+        </button>
+        <button class="btn btn-default mb-2">
+            <a style="color: #fff;" href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a>
+        </button>
+
+<!--      <input type="email" name="email" placeholder="enter your email" id="email" class="box">-->
+<!--      <input type="password" name="password" placeholder="enter your password" id="password" class="box">-->
+<!--      <div class="info">-->
+<!--        <div class="remember">-->
+<!--          <input type="checkbox" name="remember" id="remember-me">-->
+<!--          <label for="remember-me"> remember me </label>-->
+<!--        </div>-->
+<!--        <div class="forgot">-->
+<!--          <a class="link" href="{% url 'reset-password' %}">forgot password?</a>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <button type="submit" class="btn" name="login" id="login-btn">login</button>-->
+<!--      <p>don't have an account? <a class="link" href="{% url 'register' %}">register</a></p>-->
+    </form>
+
+  </section>
+  <!-- ==================== Login Area (End) ==================== -->
+{% endblock %}

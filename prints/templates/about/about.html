@@ -1,0 +1,112 @@
+{% extends 'includes/base.html' %}
+{% load static %}
+{% load template_tags %}
+
+{% block content %}
+
+    <!-- ==================== Page-Title (Start) ==================== -->
+  <div class="page-title">
+
+    <div class="title">
+      <h2>about us</h2>
+    </div>
+
+    <div class="link">
+      <a href="{% url 'home' %}" class="fas fa-home"></a>
+      <i class="fas fa-arrow-right"></i>
+      <span class="page">about</span>
+    </div>
+
+  </div>
+  <!-- ==================== Page-Title Area (End) ==================== -->
+
+
+  <!-- ==================== About Area (Start) ==================== -->
+  <section class="about">
+
+    <div class="heading">  
+      <span>know about us</span>
+      <h2>about us</h2>  
+    </div>
+
+    <div class="box-container">
+
+      <div class="image">
+        <img src="{{about_us.image.url}}" alt="">
+      </div>
+    
+      <div class="content">
+        <h3>{{about_us.heading}}</h3>
+        <div class="line"></div>
+        <p>{{about_us.description|safe}}</p>
+        <a href="./pages/Contact/contact.html" class="btn">contact us</a>
+      </div>
+
+    </div>
+  
+  </section>
+  <!-- ==================== About Area (End) ==================== -->
+
+
+  <!-- ==================== Count Area (Start) ==================== -->
+  <div class="counting">
+
+    <div class="box">
+      <i class="fas fa-tasks"></i>
+      <div class="count" data-count="{{about_us.project_done}}">{{about_us.project_done}}+</div>
+      <h3>Projects Done</h3>
+    </div>
+
+    <div class="box">
+      <i class="fas fa-user-friends"></i>
+      <div class="count" data-count="{{about_us.satisfied_clients}}">{{about_us.satisfied_clients}}+</div>
+      <h3>Satisfied Clients</h3>
+    </div>
+
+    <div class="box">
+      <i class="fas fa-award"></i>
+      <div class="count" data-count="{{about_us.awards_won}}">{{about_us.awards_won}}+</div>
+      <h3>Awards Won</h3>
+    </div>
+
+    <div class="box">
+      <i class="fas fa-users-cog"></i>
+      <div class="count" data-count="{{about_us.expert_team}}">{{about_us.expert_team}}+</div>
+      <h3>Expert Team</h3>
+    </div>
+
+  </div>
+  <!-- ==================== Count Area (End) ==================== --> 
+
+
+  <!-- ==================== Testimonials Area (Start) ==================== -->
+  <section class="testimonial">
+
+    <div class="heading">  
+      <span>what our client's say</span>
+      <h2>our testimonials</h2>  
+    </div>
+  
+    <div class="swiper-container testimonial-slider">
+      <div class="swiper-wrapper">
+        {% for testimonial in testimonials %}
+        <div class="swiper-slide testi-item">
+          <img src="{{testimonial.image.url}}" alt="">
+          <i class="fas fa-quote-left"></i>
+          <p>{{testimonial.testimonial|safe}}</p>
+          <div class="text">
+            <h4>{{testimonial.name}}</h4>
+            <h6>{{testimonial.type}}</h6>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+      <div class="swiper-pagination swiper-pagination2"></div>
+
+    </div>
+  
+  </section>
+  <!-- ==================== Testimonials Area (End) ==================== -->
+
+{% endblock %}

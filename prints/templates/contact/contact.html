@@ -1,0 +1,107 @@
+{% extends 'includes/base.html' %}
+{% load static %}
+{% load template_tags %}
+
+{% block content %}
+
+  <!-- ==================== Page-Title (Start) ==================== -->
+  <div class="page-title">
+
+    <div class="title">
+      <h2>Contact</h2>
+    </div>
+
+    <div class="link">
+      <a href="{% url 'home' %}" class="fas fa-home"></a>
+      <i class="fas fa-arrow-right"></i>
+      <span class="page">Contact</span>
+    </div>
+
+  </div>
+  <!-- ==================== Page-Title (End) ==================== -->
+{% for message in messages %}
+  <p class="messages alert alert-success" style="text-align: center;">  {{message}} </p>
+{% endfor %}
+
+  <!-- ==================== Contact Area (Start) ==================== -->
+  <section class="contact" id="contact">
+
+    <!-- ========== Google Map (Start) ========== -->
+    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14521.110578309424!2d84.6684295!3d24.5104734!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xced615cc10331f69!2sWishfy%20Prints!5e0!3m2!1sen!2sin!4v1672730615157!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <!-- ========== Google Map (End) ========== -->
+
+    <div class="box-container">
+
+      <!-- ========== Contact Image (Start) ========== -->
+      <div class="image">
+        <img src="{% static 'assets/images/Contact/Contact.png' %}" alt="">
+      </div>
+      <!-- ========== Contact Image (End) ========== -->
+
+      <!-- ========== Contact Form (Start) ========== -->
+      <form method="post" class="contact-form" id="contact-form" action="">
+        {% csrf_token %}
+        <div class="container">
+
+          <h3>get in touch</h3>
+
+          <input type="text" name="name" class="box" id="name" placeholder="name" required>
+          <input type="email" name="email" class="box" id="email" placeholder="email" required>
+          <input type="text" name="subject" class="box" id="subject" placeholder="subject" required>
+          <textarea cols="30" rows="10" name="message" class="box" id="comment" placeholder="message" required></textarea>
+
+          <button type="submit" class="btn" name="submit" id="submit">submit</button>
+
+          <span class="alert" id="msg"></span>
+
+        </div>
+
+      </form>
+      <!-- ========== Contact Form (End) ========== -->
+
+    </div>
+
+    <!-- ========== Contact Info (Start) ========== -->
+    <div class="contact-info">
+
+      <div class="info-item">
+          <i class="fas fa-phone"></i>
+          <div class="content">
+            <h3>contact</h3>
+            <p>{{contacts.phone_number}}</p>
+            <p>{{contacts.mobile_number}}</p>
+          </div>
+      </div>
+
+      <div class="info-item">
+        <i class="fas fa-clock"></i>
+        <div class="content">
+          <h3>opening hours</h3>
+          <p>{{settings.office_day}} : {{settings.office_time}}</p>
+        </div>
+      </div>
+
+      <div class="info-item">
+          <i class="fas fa-envelope"></i>
+          <div class="content">
+            <h3>Email</h3>
+            <p class="gmail">{{contacts.info_email}}</p>
+          </div>
+      </div>
+
+      <div class="info-item">
+          <i class="fas fa-map-marker-alt"></i>
+          <div class="content">
+            <h3>address</h3>
+            <a href="https://www.google.com/maps/place/Wishfy+Prints/@24.5106484,84.6687226,18z/data=!4m5!3m4!1s0x398cc18b0508a045:0xced615cc10331f69!8m2!3d24.5104651!4d84.6684712" target="_blank"> <p>{{contacts.address}}, {{contacts.city}}, {{contacts.state}}, {{contacts.country}},
+              {{contacts.pin_code}}</p> </a>
+          </div>
+      </div>
+
+    </div>
+    <!-- ========== Contact Info (End) ========== -->
+
+  </section>
+  <!-- ==================== Contact Area (End) ==================== -->
+
+{% endblock %}

@@ -1,0 +1,73 @@
+{% load static %}
+<!-- ==================== Footer Area (Start) ==================== -->
+  <footer class="footer">
+
+    <div class="box-container">
+
+      <div class="footer-item">
+        <!-- Logo -->
+        <a class="logo" href="{% url 'home' %}">
+          <img src="{% static 'assets/images/Logo/Logo.png' %}" alt="logo">
+<!--          <h3>Wishfy.in</h3>-->
+        </a>
+        <p>We provide Extraordinary paper Quality, Exceptional Printing system. We discover the words when you require them.</p>
+        <div class="social">
+          <a href="{{contacts.facebook}}" target="_blank"><i class="fab fa-facebook-f"></i></a>
+          <a href="{{contacts.twitter}}" target="_blank"><i class="fab fa-twitter"></i></a>
+          <a href="{{contacts.instagram}}" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="{{contacts.linkedin}}" target="_blank"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-item">
+        <h2>our services</h2>
+        <div class="info links">
+          <p><i class="fas fa-circle-notch"></i><a href="{% url 'services' %}">Card Design</a></p>
+          <p><i class="fas fa-circle-notch"></i><a href="{% url 'services' %}">Banner printing</a></p>
+          <p><i class="fas fa-circle-notch"></i><a href="{% url 'services' %}">Flyer Printing</a></p>
+          <p><i class="fas fa-circle-notch"></i><a href="{% url 'services' %}">Shirt Printing</a></p>
+          <p><i class="fas fa-circle-notch"></i><a href="{% url 'services' %}">Package Design</a></p>
+          <p><i class="fas fa-circle-notch"></i><a href="{% url 'services' %}">Mug Printing</a></p>
+        </div>
+      </div>
+
+      <div class="footer-item">
+        <h2>useful links</h2>
+        <div class="info links pages">
+          <div class="links-item">
+            <p><i class="fas fa-circle-notch"></i><a href="{% url 'home' %}">home</a></p>
+            <p><i class="fas fa-circle-notch"></i><a href="{% url 'about-us' %}">about</a></p>
+            <p><i class="fas fa-circle-notch"></i><a href="{% url 'testimonial' %}">testimonials</a></p>
+            <p><i class="fas fa-circle-notch"></i><a href="{% url 'services' %}">services</a></p>
+            <p><i class="fas fa-circle-notch"></i><a href="{% url 'products' %}">products</a></p>
+          </div>
+          <div class="links-item">
+            <p><i class="fas fa-circle-notch"></i><a href="{% url 'faq' %}">Faq</a></p>
+            <p><i class="fas fa-circle-notch"></i><a href="{% url 'contact-us' %}">contact</a></p>
+          </div>
+        </div>
+      </div>
+
+      <div class='footer-item'>
+        <h2>contact info</h2>
+        <div class="info connect">
+          <p><i class="fas fa-phone"></i><span>{{contacts.phone_number}}</span></p>
+          <p><i class="fas fa-phone"></i><span>{{contacts.mobile_number}}</span></p>
+          <p><i class="fas fa-envelope"></i><span class="gmail">{{contacts.info_email}}</span></p>
+          <p><i class="fas fa-map"></i><span>
+            <a href="https://www.google.com/maps/place/Wishfy+Prints/@24.5106484,84.6687226,18z/data=!4m5!3m4!1s0x398cc18b0508a045:0xced615cc10331f69!8m2!3d24.5104651!4d84.6684712" target="_blank">
+            {{contacts.address}}, {{contacts.city}}, {{contacts.state}}, {{contacts.country}},
+            {{contacts.pin_code}}
+            </a>
+          </span></p>
+        </div>
+      </div>
+
+    </div>
+
+<!--    <div class="content">-->
+<!--        <p>Copyright <span>AS_Designs</span> | all rights reserved</p>-->
+<!--    </div>-->
+
+  </footer>
+  <!-- ==================== Footer Area (End) ==================== -->

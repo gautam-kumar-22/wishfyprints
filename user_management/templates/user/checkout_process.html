@@ -1,0 +1,175 @@
+{% extends 'includes/base.html' %}
+{% load static %}
+{% load template_tags %}
+{% block content %}
+  <!-- ==================== Page-Title (Start) ==================== -->
+  <div class="page-title">
+
+    <div class="title">
+      <h2>Checkout</h2>
+    </div> 
+
+    <div class="link">
+      <a href="{% url 'home' %}" class="fas fa-home"></a>
+      <i class="fas fa-arrow-right"></i>
+      <span class="page">Checkout</span>
+    </div>
+
+  </div>
+  <!-- ==================== Page-Title (End) ==================== -->
+  
+ 
+
+  <!-- ==================== Checkout Area (Start) ==================== -->
+  <section>
+    <form method="post" action="{% url 'payment-process' %}" class="form">
+      {% csrf_token %}
+    <div class="checkout">
+
+      <div class="box-1">
+
+        <!-- ========== Billing-Address Area (Start) ========== -->
+        <div class="billing address checkout-item">
+
+          <div class="heading">
+            <h2>billing address</h2>
+          </div>
+
+            <div class="input-box">
+              <input type="text" name="billing_first_name" placeholder="first name" id="b-first-name" class="box" value="{{billing_address.0.first_name}}">
+              <input type="text" name="billing_last_name" placeholder="last name" id="b-last-name" class="box" value="{{billing_address.0.last_name}}">
+            </div>
+            <input type="text" name="billing_primary_address" placeholder="address" id="b-address" class="box" value="{{billing_address.0.primary_address}}">
+            <input type="text" name="billing_primary_address2" placeholder="address" id="c-address" class="box" value="{{billing_address.0.primary_address2}}">
+            <div class="input-box">
+              <input type="text" name="billing_city" placeholder="town/city" id="b-city" class="box" value="{{billing_address.0.city}}">
+              <input type="text" name="billing_state" placeholder="State" id="b-state" class="box" value="{{billing_address.0.state}}">
+              <input type="text" name="billing_zip" placeholder="postcode/ZIP" id="b-zip" class="box" value="{{billing_address.0.pin_code}}">
+            </div>
+            <div class="input-box">
+              <input type="text" name="billing_phone_number" placeholder="phone no" id="b-number" class="box" value="{{billing_address.0.phone_number}}">
+              <input type="text" name="billing_landmark" placeholder="landmark" id="b-landmark" class="box" value="{{billing_address.0.landmark}}">
+            </div>
+
+        </div>
+        <!-- ========== Billing-Address Area (End) ========== -->
+
+
+
+        <!-- ========== Shipping-Address Area (Start) ========== -->
+        <div class="shipping address checkout-item">
+
+          <div class="heading">
+            <h2>shipping address</h2>
+          </div>
+
+            <div class="input-box">
+              <input type="text" name="shipping_first_name" placeholder="first name" id="s-first-name" class="box" value="{{shipping_address.0.first_name}}">
+              <input type="text" name="shipping_last_name" placeholder="last name" id="s-last-name" class="box" value="{{shipping_address.0.last_name}}">
+            </div>
+            <input type="text" name="shipping_primary_address" placeholder="address" id="s-address" class="box" value="{{shipping_address.0.primary_address}}">
+            <input type="text" name="shipping_primary_address2" placeholder="address" id="sc-address" class="box" value="{{shipping_address.0.primary_address2}}">
+            <div class="input-box">
+              <input type="text" name="shipping_city" placeholder="town/city" id="s-city" class="box" value="{{shipping_address.0.city}}">
+              <input type="text" name="shipping_state" placeholder="State" id="s-state" class="box" value="{{shipping_address.0.state}}">
+              <input type="text" name="shipping_zip" placeholder="postcode/ZIP" id="s-zip" class="box" value="{{shipping_address.0.pin_code}}">
+            </div>
+            <div class="input-box">
+              <input type="text" name="shipping_phone_number" placeholder="phone no" id="s-number" class="box" value="{{shipping_address.0.phone_number}}">
+              <input type="text" name="shipping_landmark" placeholder="landmark" id="s-landmark" class="box" value="{{shipping_address.0.landmark}}">
+            </div>
+
+        </div>
+        <!-- ========== Shipping-Address Area (End) ========== -->
+
+      </div>
+
+      <div class="box-2">
+
+        <!-- ========== Payment-Method Area (Start) ========== -->
+        <div class="payment-methods checkout-item">
+
+          <div class="heading">
+            <h2>payment method</h2>
+          </div>
+
+          <div class="content" style="text-align: left;">
+
+            <div class="payment">
+              <input type="radio" id="direct-bank-transfer" name="payment" value="DIRECT">
+              <label for="direct-bank-transfer">direct bank transfer</label>
+              <div class="payment-body active">
+                <p>Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have our account..</p>
+              </div>
+            </div>
+
+            <div class="payment">
+              <input type="radio" id="cash-on-delivery" name="payment" value="CASH">
+              <label for="cash-on-delivery">cash on delivery</label>
+              <div class="payment-body">
+                <p>Please send your cheque to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</p>
+              </div>
+            </div>
+
+            <div class="payment">
+              <input type="radio" id="paypal" name="payment" value="PAYPAL">
+              <label for="paypal">paypal</label>
+              <div class="payment-body">
+                <div id="paypal_button">
+                </div>
+                <p>Pay via PayPal; you can pay with your credit card if you don’t have a PayPal account.</p>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+        <!-- ========== Payment-Method Area (End) ========== -->
+
+
+        <!-- ========== Cart-Total Area (Start) ========== -->
+        <div class="shop-summary checkout-item" style="text-align: left;">
+
+          <div class="heading">
+            <h2>cart total</h2>
+          </div>
+
+          <div class="summary-list">
+
+            <div class="summary-item">
+              <div class="name box" style="border: None !important; text-transform: capitalize;">sub total</div>
+              <div class="value box" style="border: None !important; text-transform: capitalize;">{% cart_sub_total carts %}</div>
+            </div>
+
+            <div class="summary-item">
+              <div class="name box" style="border: None !important; text-transform: capitalize;">delivery fee</div>
+              <div class="value box" style="border: None !important; text-transform: capitalize;">0.00</div>
+            </div>
+
+            <div class="summary-item">
+              <div class="name box" style="border: None !important; text-transform: capitalize;">discount</div>
+              <div class="value box" style="border: None !important; text-transform: capitalize;">{% cart_total_discount carts %}</div>
+            </div>
+
+            <div class="summary-item">
+              <div class="name box" style="border: None !important; text-transform: capitalize;">total</div>
+              <div class="value box" style="border: None !important; text-transform: capitalize;">{% cart_total carts %}</div>
+            </div>
+
+          </div>
+
+          <button type="submit" class="btn" id="place-order">place order</button>
+
+        </div>
+        <!-- ========== Cart-Total Area (End) ========== -->
+
+
+      </div>
+
+    </div>
+    </form>
+  </section>
+  <!-- ==================== Checkout Area (End) ==================== -->
+
+<script src="{% static 'assets/js/payment-method.js' %}"></script>
+{% endblock %}
