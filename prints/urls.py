@@ -16,6 +16,8 @@ Including another URLconf
 
 from django.urls import path
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.home, name='home'),
@@ -29,3 +31,4 @@ urlpatterns = [
     path('contact-us', views.contact_us, name='contact-us'),
 
 ]
+

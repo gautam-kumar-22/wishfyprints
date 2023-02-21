@@ -15,7 +15,7 @@ temp/
 __pycache__/*
 *.pyc
 
-#*.jpg
-#*.jpeg
+*.jpg
+*.jpeg
 
 *.sqlite3
