@@ -14,11 +14,12 @@ def get_page_context(request):
     setting = Settings.objects.all().first()
     contacts = Contact.objects.all().first()
     categories = Category.objects.filter(status=True)
+    service = Service.objects.filter(status=True)
     carts = 0
     if request.user:
         carts = Cart.objects.filter(user=request.user.id)
     context = {"menus": menus, 'submenus': submenus, "settings": setting, "contacts": contacts,
-               "categories": categories, "carts": carts}
+               "categories": categories, "carts": carts, "service": service}
     return context
 
 

@@ -22,12 +22,9 @@
       <div class="footer-item">
         <h2>our services</h2>
         <div class="info links">
-          <p><i class="fas fa-circle-notch"></i><a href="{% url 'services' %}">Card Design</a></p>
-          <p><i class="fas fa-circle-notch"></i><a href="{% url 'services' %}">Banner printing</a></p>
-          <p><i class="fas fa-circle-notch"></i><a href="{% url 'services' %}">Flyer Printing</a></p>
-          <p><i class="fas fa-circle-notch"></i><a href="{% url 'services' %}">Shirt Printing</a></p>
-          <p><i class="fas fa-circle-notch"></i><a href="{% url 'services' %}">Package Design</a></p>
-          <p><i class="fas fa-circle-notch"></i><a href="{% url 'services' %}">Mug Printing</a></p>
+          {% for service in services %}
+          <p><i class="fas fa-circle-notch"></i><a href="{% url 'service-detail' service.slug %}">{{service.title}}</a></p>
+          {% endfor %}
         </div>
       </div>
 

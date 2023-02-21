@@ -105,7 +105,7 @@
           <img src="{{service.image.url}}" alt="Service-Image">
         </div>
         <div class="content">
-          <a href="./pages/Services/Service-Details.html"><h3>{{service.title}}</h3></a>
+          <a href="{% url 'service-detail' service.slug %}"><h3>{{service.title}}</h3></a>
 <!--          <p>{{service.description|safe}}</p>-->
         </div>
       </div>
@@ -212,7 +212,7 @@
           {% endif %}
         </div>
         <div class="content">
-          <a href="./pages/Shop/Product-Details.html"><h3>{{product.title}}</h3></a>
+          <a href="{% url 'product-details' product.slug %}"><h3>{{product.title}}</h3></a>
           <div class="price">
               <p>{{product.price|get_price:product.category.discount}} <span>{{product.price}}</span></p>
           </div>
