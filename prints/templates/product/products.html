@@ -117,7 +117,7 @@
                     </div>
                     <div class="content">
                         <a href="{% url 'product-details' product.slug %}"><h3>{{product.title|title}}</h3></a>
-                        <p>{{product.description|safe}}</p>
+                        <p style="width: 70%; text-overflow: ellipsis; white-space: nowrap; display: block; overflow: hidden;">{{product.about|safe}}</p>
                         <div class="price">
                             <p>{{product.price|get_price:product.category.discount}} <span>{{product.price}}</span></p>
                         </div>
