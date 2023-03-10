@@ -128,7 +128,7 @@ def products(request):
     category = request.GET.get('category', "").lower()
     if category and category != "all":
         try:
-            product_list = product_list.filter(category__type=category)
+            product_list = product_list.filter(category__slug=category)
         except Exception as e:
             pass
     sortby = request.GET.get('sortby', "").lower()
