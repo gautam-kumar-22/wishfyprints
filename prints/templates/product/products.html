@@ -27,7 +27,7 @@
                     </div>
                     {% for category in categories %}
                     <div class="item">
-                        <a href="{% url 'products' %}?category={{category.type}}"><i class="fas fa-circle-notch"></i>{{category.type|title}}</a>
+                        <a href="{% url 'products' %}?category={{category.slug}}"><i class="fas fa-circle-notch"></i>{{category.type|title}}</a>
                         <p>({% count_product category.id %})</p>
                     </div>
                     {% endfor %}
