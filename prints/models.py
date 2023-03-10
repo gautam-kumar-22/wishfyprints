@@ -135,9 +135,14 @@ class Industry(models.Model):
 
 class Category(models.Model):
     type = models.CharField(max_length=255, blank=False, null=False)
+    slug = models.SlugField(max_length=255, null=True, blank=True)
     discount = models.FloatField(null=True, blank=True, default=0.0)
     available_quantity = models.IntegerField(default=5)
     status = models.BooleanField(default=True)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.type)
+        super(Category, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.type

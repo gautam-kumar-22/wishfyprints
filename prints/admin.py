@@ -61,6 +61,7 @@ class FeaturesAdmin(admin.ModelAdmin):
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['type', 'category_discount', 'available_quantity', 'status']
+    prepopulated_fields = {'slug': ('type',)}
 
     def category_discount(self, obj):
         return str(obj.discount) + "%"

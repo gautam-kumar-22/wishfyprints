@@ -19,14 +19,13 @@ def get_page_context(request):
     if request.user:
         carts = Cart.objects.filter(user=request.user.id)
     context = {"menus": menus, 'submenus': submenus, "settings": setting, "contacts": contacts,
-               "categories": categories, "carts": carts, "service": service}
+               "categories": categories, "carts": carts, "services": service}
     return context
 
 
 def get_home_page_detail(request):
     about_us = AboutUs.objects.all().first()
     features = Features.objects.filter(status=True)
-    service = Service.objects.filter(status=True)
     context = get_page_context(request)
     slider = Slider.objects.filter(page__title='Home')
     projects = Project.objects.filter(status=True)
@@ -36,7 +35,6 @@ def get_home_page_detail(request):
     testimonials = Testimonial.objects.all()
     blog = Blog.objects.filter(status=True)
     context.update({
-        "services": service,
         "projects": projects,
         "products": products,
         "photos": photos,

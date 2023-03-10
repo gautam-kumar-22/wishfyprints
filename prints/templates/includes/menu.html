@@ -18,7 +18,7 @@
         <div class="dropdown-content">
           <a href="{% url 'products' %}">All Products</a>
             {% for category in categories %}
-            <a href="{% url 'products' %}?category={{category.type}}">{{category.type}}</a>
+            <a href="{% url 'products' %}?category={{category.slug}}">{{category.slug}}</a>
             {% endfor %}
           <a href="{% url 'wishlists' %}">My Wishlist</a>
           <a href="{% url 'cart' %}">My Cart</a>
@@ -27,7 +27,7 @@
       </div>
 
     {% for category in categories %}
-        <a class="nav-btn" href="{% url 'products' %}?category={{category.type}}">{{category.type}}</a>
+        <a class="nav-btn" href="{% url 'products' %}?category={{category.slug}}">{{category.slug}}</a>
     {% endfor %}
       <a class="nav-btn" href="{% url 'contact-us' %}">contact</a>
 
