@@ -60,7 +60,7 @@
 
     <div id="menu-btn" class="icon fas fa-bars"></div>
 
-    <div class="icon-container">
+    <div class="icon-container" style="z-index: 1111">
       {% if user.is_authenticated %}
       <div class="title" style="color: #fff;"><h2>Welcome! &nbsp;&nbsp; {{user.username}}</h2></div>
       <div class="dropdown-menu">
