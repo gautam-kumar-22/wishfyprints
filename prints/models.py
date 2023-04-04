@@ -193,8 +193,8 @@ class Photo(models.Model):
         super(Photo, self).save(*args, **kwargs)
         img = Image.open(self.photo.path)
         if img.height > 1125 or img.width > 1125:
-            img.thumbnail((1125, 1125))
-        img.save(self.photo.path, quality=70, optimize=True)
+            img.thumbnail((500, 500))
+        img.save(self.photo.path, quality=100, optimize=True)
 
 
 class AdditionalInformation(models.Model):
