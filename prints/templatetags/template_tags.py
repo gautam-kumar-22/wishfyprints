@@ -26,7 +26,9 @@ def get_photo_from_photos(photos):
 
 @register.filter(name="get_tags")
 def get_tags(tags):
-    return [tag for tag in tags.split(",")]
+    if tags:
+        return [tag for tag in tags.split(",")]
+    return []
 
 
 @register.filter(name="get_additional_information")
