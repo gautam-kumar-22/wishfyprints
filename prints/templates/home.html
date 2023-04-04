@@ -214,7 +214,7 @@
         <div class="content">
           <a href="{% url 'product-details' product.slug %}"><h3>{{product.title}}</h3></a>
           <div class="price">
-              <p>{{product.price|get_price:product.category.discount}} <span>{{product.price}}</span></p>
+              <p>₹ {{product.price|get_price:product.category.discount}} <span>₹ {{product.price}}</span></p>
           </div>
         </div>
       </div>

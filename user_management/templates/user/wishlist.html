@@ -53,8 +53,8 @@
               </a>
             </div>
             <div class="box price">
-              <p>{{wish.product.price|get_price:wish.product.category.discount}}
-                <span style="text-decoration: line-through;color: red;">{{wish.product.price}}</span></p>
+              <p>₹ {{wish.product.price|get_price:wish.product.category.discount}}
+                <span style="text-decoration: line-through;color: red;">₹ {{wish.product.price}}</span></p>
             </div>
             {% if wish.product.category.available_quantity > 0%}
             <div class="box status in">inStock</div>

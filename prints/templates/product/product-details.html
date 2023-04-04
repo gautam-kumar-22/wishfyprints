@@ -58,7 +58,7 @@
 
             <h3>{{product_details.title}}</h3>
 
-            <div class="price">{{product_details.price|get_price:product_details.category.discount}}/- <span>{{product_details.price}}</span></div>
+            <div class="price">₹ {{product_details.price|get_price:product_details.category.discount}}/- <span>₹ {{product_details.price}}</span></div>
             {% if reviews %}
             <div class="intro">
               <div class="rating">
@@ -223,7 +223,7 @@
           <div class="content">
             <a href="{% url 'product-details' similar.slug %}"><h3>{{similar.title}}</h3></a>
             <div class="price">
-              <p>{{similar.price|get_price:similar.category.discount}} <span>{{similar.price}}</span></p>
+              <p>₹ {{similar.price|get_price:similar.category.discount}} <span>₹ {{similar.price}}</span></p>
             </div>
           </div>
         </div>

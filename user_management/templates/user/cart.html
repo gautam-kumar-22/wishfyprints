@@ -52,8 +52,8 @@
                             <div class="name"><a href="{% url 'product-details' cart.product.slug %}"> {{cart.product.title}}</a></div>
                         </div>
                         <div class="box price">
-                            <p>{{cart.product.price|get_price:cart.product.category.discount}}
-                                <span style="text-decoration: line-through">{{cart.product.price}}</span></p>
+                            <p>₹ {{cart.product.price|get_price:cart.product.category.discount}}
+                                <span style="text-decoration: line-through">₹ {{cart.product.price}}</span></p>
                         </div>
                         <div class="box  quantitly">
                             <div class="quantity buttons_added" style="width: 16rem">
@@ -69,7 +69,7 @@
                                 </form>
                             </div>
                         </div>
-                        <div class="box total">{% multiply cart.product.price|get_price:cart.product.category.discount cart.quantity %}</div>
+                        <div class="box total">₹ {% multiply cart.product.price|get_price:cart.product.category.discount cart.quantity %}</div>
                         <div class="box action">
                             <a href="{% url 'delete-cart' cart.id %}" class="icon fas fa-trash-alt delete-cart"></a>
                         </div>

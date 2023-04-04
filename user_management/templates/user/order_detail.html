@@ -101,10 +101,10 @@
                 <a href="{% url 'product-details' item.product.slug %}">{{item.product.title}}</a>
               </div>
             </div>
-            <div class="box price">{{item.price}}</div>
+            <div class="box price">₹ {{item.price}}</div>
             <div class="box quantitly">{{item.quantity}}</div>
-            <div class="box quantitly">{{item.discount}}</div>
-            <div class="box total">{{item.total}}</div>
+            <div class="box quantitly">₹ {{item.discount}}</div>
+            <div class="box total">₹ {{item.total}}</div>
           </div>
         {% endfor %}
         </div>
