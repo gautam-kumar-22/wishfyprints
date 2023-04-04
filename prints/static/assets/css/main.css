@@ -1130,9 +1130,9 @@ section{
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    background: -webkit-linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3));
-    /*background:         linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3));*/
-    background: none;
+    /*background: -webkit-linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3));
+    background:         linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3));*/
+    background: none !important;
 }
   
 .home-item .content .text{
