@@ -215,10 +215,14 @@ def checkout_process(request):
     shipping_address = Address.objects.filter(user=request.user, address_type="shipping")
     billing_address = Address.objects.filter(user=request.user, address_type="billing")
     carts = Cart.objects.filter(user=request.user)
-    paypal_forms = PaypalFormView
+
+    if not len(shipping_address) or not len(billing_address):
+        messages.error(request, "Error: Your profile is incomplete, please complete it first..")
+        return redirect('/edit-address')
+
     context.update({"user": user, "user_contact": user_contact, "user_profile": user_profile,
                     "shipping_address": shipping_address, "billing_address": billing_address,
-                    "carts": carts, "paypal_forms": paypal_forms})
+                    "carts": carts})
     return render(request, "user/checkout_process.html", context=context)
 
 
@@ -373,6 +377,15 @@ def payment_process(request):
                                                   city=shipping_city, state=shipping_state, pin_code=shipping_zip,
                                                   phone_number=shipping_phone_number, landmark=shipping_landmark,
                                                   address_type="order_shipping")
+
+        validation = [billing_first_name, billing_last_name, billing_primary_address, billing_city, billing_state,
+                        billing_zip, billing_phone_number, billing_landmark, shipping_first_name, shipping_last_name,
+                        shipping_primary_address, shipping_city, shipping_state, shipping_zip, shipping_phone_number,
+                        shipping_landmark]
+        if any(len(x) == 0 for x in validation):
+            messages.error(request, "Error: Your profile is incomplete, please complete first..")
+            context = {}
+            return redirect(request.headers.get('Referer'))
 
         # Create Order
         payment_status = 0  # Not Paid

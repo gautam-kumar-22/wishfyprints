@@ -25,7 +25,9 @@
     <form method="post" action="{% url 'payment-process' %}" class="form">
       {% csrf_token %}
     <div class="checkout">
-
+      {% for message in messages %}
+          <p class="messages alert alert-danger" style="text-align: center;">  {{message}}</p>
+      {% endfor %}
       <div class="box-1">
 
         <!-- ========== Billing-Address Area (Start) ========== -->
@@ -113,11 +115,12 @@
 
             <div class="payment">
               <input type="radio" id="paypal" name="payment" value="PAYPAL">
-              <label for="paypal">paypal</label>
+              <label for="paypal">QR Code</label>
               <div class="payment-body">
                 <div id="paypal_button">
                 </div>
-                <p>Pay via PayPal; you can pay with your credit card if you don’t have a PayPal account.</p>
+                <p>Pay via QR Code; you can pay with your payment waller, just scan this QR code and send us screenshot
+                  of payment with transaction id.</p>
               </div>
             </div>
 

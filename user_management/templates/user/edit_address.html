@@ -2,7 +2,6 @@
 {% load static %}
 {% load template_tags %}
 {% block content %}
-    
   <!-- ==================== Page-Title (Start) ==================== -->
   <div class="page-title">
 
@@ -23,7 +22,9 @@
      
   <!-- ==================== Edit Address (Start) ==================== -->
   <section class="edit-address">
-
+    {% for message in messages %}
+          <p class="messages alert alert-danger" style="text-align: center;">  {{message}}</p>
+      {% endfor %}
     <form class="form" action="" method="post">
       {% csrf_token %}
       <h3>edit address</h3>
