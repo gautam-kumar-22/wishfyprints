@@ -35,7 +35,7 @@
           <div class="image-container">
             <div class="main">
               {% if product_details.photos.values %}
-              <img src="{% static product_details|get_image %}" alt="" style="object-fit: none;" onclick="lightbox(0)">
+              <img src="{% static product_details|get_image %}" alt="" style="object-fit: contain;" onclick="lightbox(0)">
               {% else %}
               <img src="{% static 'assets/images/default.jpg' %}" alt="no-image">
               {% endif %}
