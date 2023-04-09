@@ -46,7 +46,7 @@ urlpatterns = [
     path('failed', PaymentFailedView.as_view(), name='failed'),
     path('order-history', OrderHistoryListView.as_view(), name='order-history'),
     path('payment-process', views.payment_process, name="payment-process"),
-    path('checkout-session/<id>', create_checkout_session, name='checkout-session'),
+    path('checkout-session/<id>', views.create_checkout_session, name='checkout-session'),
     path('order-detail/<id>', OrderDetailView.as_view(), name='order-detail'),
     path('product-review', views.product_review, name="product-review")
 ]
