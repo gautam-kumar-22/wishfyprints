@@ -27,7 +27,11 @@
 
       <!-- ========== Profile-Pic Area (Start) ========== -->
       <div class="image">
-        <img src="{{user_profile.0.image}}" alt="">
+        {% if user_profile.0.image %}
+          <img src="{{user_profile.0.image}}" alt="">
+        {% else %}
+          <img src="{% static 'assets/images/default.jpg' %}" alt="">
+        {% endif %}
       </div>
       <!-- ========== Profile-Pic Area (End) ========== -->
   

@@ -294,7 +294,11 @@ def edit_address(request):
             billing_address.phone_number = billing_phone_number
             billing_address.save()
         else:
-            billing_address = Address.objects.filter(user=request.user, address_type="billing").first()
+            billing_address = Address.objects.filter(user=request.user, address_type="billing")
+            if len(billing_address):
+                billing_address = billing_address.first()
+            else:
+                billing_address = Address.objects.create(user=request.user, address_type="billing")
             billing_address.first_name = first_name
             billing_address.last_name = last_name
             billing_address.primary_address = primary_address

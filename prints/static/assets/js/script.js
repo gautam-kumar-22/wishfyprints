@@ -49,8 +49,10 @@ $(document).ready(function(){
         if($("#is_billing_same").click(function(){
          if($(this).prop('checked') == true){
             $(".billing_address").hide();
+            $(".billing_address input").removeAttr('required');
          }else{
             $(".billing_address").show();
+            $(".billing_address input").prop('required',true);
          }
         }));
 
