@@ -29,7 +29,7 @@ def get_home_page_detail(request):
     context = get_page_context(request)
     slider = Slider.objects.filter(page__title='Home')
     projects = Project.objects.filter(status=True)
-    products = Product.objects.filter(status=True)
+    products = Product.objects.filter(status=True, category__status=True)
     photos = Photo.objects.all()
     categories = Category.objects.filter(status=True)
     testimonials = Testimonial.objects.all()
@@ -122,7 +122,7 @@ def service_details(request, slug):
 
 
 def products(request):
-    product_list = Product.objects.filter(status=True).order_by('-id')
+    product_list = Product.objects.filter(status=True, category__status=True).order_by('-id')
     context = get_page_context(request)
     categories = Category.objects.filter(status=True)
     category = request.GET.get('category', "").lower()
@@ -152,7 +152,7 @@ def products(request):
 def product_details(request, slug):
     context = get_page_context(request)
     product_detail = get_object_or_404(Product, slug__iexact=slug)
-    products = Product.objects.filter(status=True, category=product_detail.category)
+    products = Product.objects.filter(status=True, category=product_detail.category, category__status=True)
     reviews = Review.objects.filter(product=product_detail.id)
     context.update({
         "similar_products": products,
