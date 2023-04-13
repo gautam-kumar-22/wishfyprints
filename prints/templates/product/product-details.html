@@ -42,7 +42,7 @@
             </div>
             <div class="change-btns">
               {% if product_details.photos.values %}
-              <img class="active" src="{% static product_details|get_image %}" alt="" style="height:150px; width: 150px">
+              <img class="active" src="{% static product_details|get_image %}" alt="" style="height:150px;width: 120px;object-fit: unset;">
               {% for photo in product_details.photos.values %}
                 {% if photo|get_photo_from_photos != product_details|get_image %}
                   <img src="{{photo|get_photo_from_photos}}" alt="" style="height:150px; width: 150px">
