@@ -69,17 +69,21 @@ def delete_wishlist(request, pk):
     return redirect("/wishlists")
 
 
-@login_required
-def add_to_wishlist(request, product_id):
+def add_to_wishlist(request, product_id=None):
+    if not request.user.is_authenticated:
+        return JsonResponse({'status': 302, "message": "Error: Please login to add item to wishlist."})
     try:
         product = Product.objects.get(pk=int(product_id))
         product_in_wishlist = Wishlist.objects.filter(user=request.user, product=product)
         if not len(product_in_wishlist):
             Wishlist.objects.create(user=request.user, product=product)
+            return JsonResponse({'status': 201, "message": "Success: Item has been added to wishlist."})
+        else:
+            return JsonResponse({'status': 200, "message": "Success: Item has been added to wishlist."})
     except Product.DoesNotExist as err:
         print(f"Product doesn't exists for id {product_id}")
         logging.log(1, f"Product doesn't exists for id {product_id}")
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        return JsonResponse({'status': 400, "message": "Error: Something went wrong, please try again."})
 
 
 @login_required

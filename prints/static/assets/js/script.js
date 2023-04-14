@@ -195,6 +195,27 @@ $(document).ready(function(){
             $(".alert-danger").slideUp(500);
         });
 
+  // Wishlist add button
+        $(".add-wishlist").click(function(){
+            var href = $(this).attr("href");
+            if(href){
+                $.ajax(href, {
+                   type: 'GET',
+                    success: function (data, status) {
+                        console.log(data);
+                        if(data.status == 302){
+                            window.location.href = "/login/?next="+window.location.pathname;
+                        }
+                    },
+                    error: function (jqXhr, textStatus, errorMessage) {
+//                        console.log(status);
+                    }
+
+                });
+                return false;
+            }
+        });
+
 });
 
 
