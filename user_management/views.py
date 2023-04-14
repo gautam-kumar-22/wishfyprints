@@ -71,8 +71,6 @@ def delete_wishlist(request, pk):
 
 @login_required
 def add_to_wishlist(request, product_id):
-    target_url = request.headers.get("Referer")
-    target_url = request.META.get("HTTP_REFERER")
     try:
         product = Product.objects.get(pk=int(product_id))
         product_in_wishlist = Wishlist.objects.filter(user=request.user, product=product)
@@ -81,7 +79,7 @@ def add_to_wishlist(request, product_id):
     except Product.DoesNotExist as err:
         print(f"Product doesn't exists for id {product_id}")
         logging.log(1, f"Product doesn't exists for id {product_id}")
-    return redirect(target_url)
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 @login_required
