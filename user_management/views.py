@@ -79,8 +79,7 @@ def add_to_wishlist(request, product_id):
     except Product.DoesNotExist as err:
         print(f"Product doesn't exists for id {product_id}")
         logging.log(1, f"Product doesn't exists for id {product_id}")
-    # return redirect(request.headers.get('Referer'))
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    return redirect(request.headers.get('Referer'))
 
 
 @login_required
