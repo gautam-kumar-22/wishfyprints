@@ -58,7 +58,20 @@
 
             <h3>{{product_details.title}}</h3>
 
-            <div class="price">₹ {{product_details.price|get_price:product_details.category.discount}}/- <span>₹ {{product_details.price}}</span></div>
+            <div class="price">₹ {{product_details.price|get_price:product_details.category.discount}}/- <span>₹ {{product_details.price}}</span>
+            <a href="{% url 'add-to-wishlist' product_details.id %}" style="float: right" title="Add to Wishlist">
+                    <i class="far fa-heart" aria-hidden="true" style="
+                            margin: 0px 0px 0px 15px;
+                            top: 0px;
+                            position: relative;
+                            color: white;
+                            border-radius: 50%;
+                            background: deeppink;
+                            padding: 15% 11% 12% 15%;
+                        "></i>
+                  </a>
+
+            </div>
             {% if reviews %}
             <div class="intro">
               <div class="rating">
@@ -84,6 +97,7 @@
             </div>
             <input type="hidden" name="product_id" value="{{product_details.id}}">
             <button type="submit" class="btn"> add to cart </button>
+
             </form>
             <div class='categories'>
               <h4>Categories:</h4>
