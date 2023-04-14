@@ -17,6 +17,7 @@ from django.conf import settings
 from django.http import JsonResponse, HttpResponseNotFound
 from django.contrib import messages
 from django.utils.decorators import method_decorator
+from django.http import HttpResponseRedirect
 import stripe
 import logging
 import json
@@ -78,7 +79,8 @@ def add_to_wishlist(request, product_id):
     except Product.DoesNotExist as err:
         print(f"Product doesn't exists for id {product_id}")
         logging.log(1, f"Product doesn't exists for id {product_id}")
-    return redirect(request.headers.get('Referer'))
+    # return redirect(request.headers.get('Referer'))
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 @login_required
