@@ -206,6 +206,14 @@ $(document).ready(function(){
                         if(data.status == 302){
                             window.location.href = "/login/?next="+window.location.pathname;
                         }
+                        else{
+                            $(".wishlist-success").empty();
+                            $("<p>" + data.message + "</p>").appendTo('.wishlist-success');
+                            $(".wishlist-success").fadeTo(5000, 500).slideUp(500, function() {
+                                $(".wishlist-success").slideUp(500);
+                            });
+                            return false;
+                        }
                     },
                     error: function (jqXhr, textStatus, errorMessage) {
 //                        console.log(status);
