@@ -1,17 +1,5 @@
 {% load static %}
-<style>
-.navbar a>form>input[type=search] {
-  position: relative;
-  height: 30px;
-  float: right;
-  top: 15px;
-  border: none;
-  font-size: 15px;
-  width: 30%;
-  padding-left: 1.5%;
-}
-</style>
-<nav class="navbar" style="width: 85%;">
+<nav class="navbar">
       <a class="nav-btn" href="{% url 'home' %}">home</a>
 
       <div class="dropdown-menu">
@@ -43,10 +31,10 @@
     {% endfor %}
       <a class="nav-btn" href="{% url 'contact-us' %}">contact</a>
 
-    <a style="min-width: 30%;float: right;width: auto;">
-        <form method="get" action="/products">
-            <input id="search-product" type="search" name="search" placeholder="Search..." value="{{search}}">
-        </form>
-    </a>
+<!--    <a style="min-width: 30%;float: right;width: auto;">-->
+<!--        <form method="get" action="/products">-->
+<!--            <input id="search-product" type="search" name="search" placeholder="Search..." value="{{search}}">-->
+<!--        </form>-->
+<!--    </a>-->
 
     </nav>

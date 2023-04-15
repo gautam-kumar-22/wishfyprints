@@ -58,7 +58,15 @@
     <!-- ===== Menu Area (Start) ===== -->
     {% include 'includes/menu.html' %}
 
-    <div id="menu-btn" class="icon fas fa-bars"></div>
+    <div id="menu-btn" class="icon fas fa-bars">
+
+    </div>
+
+    <div class="search-box">
+      <form method="get" action="/products">
+          <input id="search-product" type="search" name="search" placeholder="Search..." value="{{search}}" autocomplete="off">
+      </form>
+    </div>
 
     <div class="icon-container" style="z-index: 1111">
       {% if user.is_authenticated %}
@@ -117,5 +125,13 @@
   border-radius: 50%;
   padding: 5px;
 }
-
+.header-2 .search-box>form>input[type=search] {
+  position: relative;
+  height: 30px;
+  float: right;
+  border: none;
+  font-size: 15px;
+  width: 30%;
+  padding-left: 1.5%;
+}
 </style>
