@@ -4916,3 +4916,6 @@ input[type="range"]::-moz-range-thumb{
     border-color: #f5c6cb;
     font-weight: 500;
 }
+.add-wishlist{
+    cursor: pointer;
+}

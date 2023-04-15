@@ -210,7 +210,7 @@ $(document).ready(function(){
 
     // Wishlist add button
     $(".add-wishlist").click(function(){
-        var href = $(this).attr("href");
+        var href = $(this).attr("data-href");
         if(href){
             $.ajax(href, {
                type: 'GET',

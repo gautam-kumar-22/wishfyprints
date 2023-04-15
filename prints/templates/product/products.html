@@ -106,7 +106,7 @@
                     <div class="image">
                         <div class="options">
                             <a href="{% url 'add-to-cart' product.id %}"><i class="fas fa-cart-plus"></i></a>
-                            <a href="{% url 'add-to-wishlist' product.id %}" class="add-wishlist"><i class="far fa-heart"></i></a>
+                            <a data-href="{% url 'add-to-wishlist' product.id %}" class="add-wishlist"><i class="far fa-heart"></i></a>
                             <a href="{% url 'product-details' product.slug %}"><i class="far fa-eye"></i></a>
                         </div>
                         {% if product.photos.values %}
@@ -132,7 +132,7 @@
                     <div class="image">
                         <div class="options">
                             <a href="{% url 'add-to-cart' product.id %}"><i class="fas fa-cart-plus"></i></a>
-                            <a href="{% url 'add-to-wishlist' product.id %}" class="add-wishlist"><i class="far fa-heart"></i></a>
+                            <a data-href="{% url 'add-to-wishlist' product.id %}" class="add-wishlist"><i class="far fa-heart"></i></a>
                             <a href="{% url 'product-details' product.slug %}"><i class="far fa-eye"></i></a>
                         </div>
                         {% if product.photos.values %}
