@@ -1,5 +1,23 @@
 $(document).ready(function(){
 
+    toastr.options = {
+      "closeButton": true,
+      "debug": false,
+      "newestOnTop": false,
+      "progressBar": false,
+      "positionClass": "toast-bottom-right",
+      "preventDuplicates": false,
+      "onclick": null,
+      "showDuration": "300",
+      "hideDuration": "1000",
+      "timeOut": "5000",
+      "extendedTimeOut": "1000",
+      "showEasing": "swing",
+      "hideEasing": "linear",
+      "showMethod": "fadeIn",
+      "hideMethod": "fadeOut"
+    };
+
   $('.scroll-top').hide();
   
   /*---------- Mobile-Navbar Toggler ----------*/
@@ -189,6 +207,31 @@ $(document).ready(function(){
         $(".alert-success").fadeTo(5000, 500).slideUp(500, function() {
             $(".alert-success").slideUp(500);
         });
+
+    // Wishlist add button
+    $(".add-wishlist").click(function(){
+        var href = $(this).attr("href");
+        if(href){
+            $.ajax(href, {
+               type: 'GET',
+                success: function (data, status) {
+                    console.log(data);
+                    if(data.status == 302){
+                        window.location.href = "/login/?next="+window.location.pathname;
+                    }
+                    else{
+                        toastr.info(data.message);
+                        return false;
+                    }
+                },
+                error: function (jqXhr, textStatus, errorMessage) {
+                    // console.log(status);
+                }
+
+            });
+            return false;
+        }
+    });
 
 });
 
