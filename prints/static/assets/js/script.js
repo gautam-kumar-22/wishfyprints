@@ -238,6 +238,13 @@ toastr.options = {
             }
         });
 
+    // Search product focus
+    $("#search-product").focus(function(){
+        $(this).css({"width": "40%"})
+    });
+    $("#search-product").focusout(function(){
+        $(this).css({"width": "15%"})
+    });
 });
 
 
