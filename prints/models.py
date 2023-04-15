@@ -185,8 +185,11 @@ class Product(models.Model):
 
 
 class Photo(models.Model):
+    def generate_path(instance, file_name):
+        return f"Media/product/{instance.Product.id}/{file_name}"
+
     Product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='photos')
-    photo = models.ImageField(upload_to='Media/product', default='Media/default.jpg')
+    photo = models.ImageField(upload_to=generate_path, default='Media/default.jpg')
 
     # resizing the image, you can change parameters like size and quality.
     def save(self, *args, **kwargs):
