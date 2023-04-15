@@ -1,10 +1,8 @@
-from django.shortcuts import render
-from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
-from django.conf import settings
 from .models import *
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.db.models import Q
 from user_management.models import Cart, Review
 
 
@@ -133,6 +131,16 @@ def products(request):
             pass
     sortby = request.GET.get('sortby', "").lower()
     orderby = request.GET.get('orderby', "").lower()
+    search_string = request.GET.get('search', "").lower()
+    if search_string:
+        product_list = product_list.filter(
+            Q(title__icontains=search_string) |
+            Q(description__icontains=search_string) |
+            Q(slug__icontains=search_string) |
+            Q(about__icontains=search_string) |
+            Q(category__type__icontains=search_string) |
+            Q(tag__icontains=search_string)
+        )
     if sortby and orderby:
         if orderby == "asc" and sortby == "name":
             product_list = product_list.order_by("title")
@@ -144,7 +152,8 @@ def products(request):
             product_list = product_list.order_by("-price")
     context.update({
         "products": product_list,
-        "categories": categories
+        "categories": categories,
+        "search": search_string
     })
     return render(request, "product/products.html", context=context)
 

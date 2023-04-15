@@ -68,9 +68,9 @@ def cart_total(carts):
 @register.simple_tag()
 def count_product(category):
     if category == "all":
-        return len(Product.objects.filter(status=True))
+        return len(Product.objects.filter(status=True, category__status=True))
     else:
-        return len(Product.objects.filter(status=True, category=category))
+        return len(Product.objects.filter(status=True, category=category, category__status=True))
 
 
 @register.filter(name='myrange')

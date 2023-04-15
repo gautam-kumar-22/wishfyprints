@@ -29,6 +29,4 @@ urlpatterns = [
     path('products', views.products, name='products'),
     path('product-details/<slug>', views.product_details, name='product-details'),
     path('contact-us', views.contact_us, name='contact-us'),
-
 ]
-

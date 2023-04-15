@@ -230,7 +230,7 @@ toastr.options = {
                         }
                     },
                     error: function (jqXhr, textStatus, errorMessage) {
-//                        console.log(status);
+                        // console.log(status);
                     }
 
                 });
