@@ -240,10 +240,10 @@ toastr.options = {
 
     // Search product focus
     $("#search-product").focus(function(){
-        $(this).css({"width": "40%"})
+        $(this).css({"width": "90%"})
     });
     $("#search-product").focusout(function(){
-        $(this).css({"width": "15%"})
+        $(this).css({"width": "30%"})
     });
 });
 
