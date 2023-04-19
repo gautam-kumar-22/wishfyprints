@@ -29,7 +29,8 @@
           <h3>order#ID</h3>
           <h3>date</h3>
           <h3>total</h3> 
-          <h3>status</h3>
+          <h3>Payment status</h3>
+          <h3>Order Status</h3>
           <h3>action</h3>
         </div> 
 
@@ -40,12 +41,15 @@
             <div class="box price">{{ order.created_on }}</div>
             <div class="box total">{{order.total}}</div>
             {% if order.payment_status %}
-            <div class="box status completed">Completed</div>
+            <div class="box status completed">Paid</div>
             {% elif order.payment_status == 0 %}
             <div class="box status processing">Pending</div>
             {% elif order.payment_status == 3 %}
             <div class="box status cancelled">Cancelled</div>
             {% endif %}
+
+            <div class="box">Dispatched</div>
+
             <div class="box action"><a href="{% url 'order-detail' order.id %}" class="icon fas fa-eye"></a></div>
           </div>
         {% endfor %}

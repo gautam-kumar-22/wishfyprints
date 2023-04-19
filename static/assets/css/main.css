@@ -4674,9 +4674,9 @@ input[type="range"]::-moz-range-thumb{
 
 .order-details .order-intro .order-id{
     font-size: 2rem;
-    font-weight: bold;
-    color: var(--black);
     padding-bottom: 1rem;
+    color: deeppink;
+    font-weight: 600;
 }
 
 .order-details .order-intro .delivery{

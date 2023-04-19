@@ -112,10 +112,76 @@
 
     </div>
     <!-- ========== Order-Items Area (End) ========== -->
+    <!-- ========== Order-Summary Area (Start) ========== -->
+    <div class="order-summary order-details-item" style="float: left; width: 110rem;">
 
+      <div class="content">
+
+        <div class="heading">
+          <h2>order Details</h2>
+        </div>
+
+        <div class="order-intro">
+          <div style="float: left">
+            <div class="order-id">#{{order_details.0.order_id}}</div>
+            <div class="delivery">{{order_details.0.created_on}}</div>
+          </div>
+          <div style="float: right;right: 7%;position: relative;">
+            <div class="order-id">Current Status</div>
+            <div class="delivery" style="color: green; font-weight: 600;">
+              {% if order_details.0.delivery_date %}
+                Order Delivered
+              {% elif order_details.0.shipping_date %}
+                Order Shipped
+              {% endif %}
+            </div>
+          </div>
+          <div style="clear: both;"></div>
+        </div>
+
+        <div class="summary-list">
+
+          <div class="summary-item">
+            <div class="name box">Order Date</div>
+            <div class="value box">{{order_details.0.created_on}}</div>
+          </div>
+
+          <div class="summary-item">
+
+          </div>
+
+          <div class="summary-item">
+            <div class="name box">Shipping Date</div>
+            <div class="value box">
+              {% if order_details.0.shipping_date %}
+                {{order_details.0.shipping_date}}
+              {% else %}
+                Waiting for shipping
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="summary-item">
+            <div class="name box">Delivery Date</div>
+            <div class="value box">
+              {% if order_details.0.delivery_date %}
+                {{order_details.0.delivery_date}}
+              {% else %}
+                Waiting for delivery
+              {% endif %}
+            </div>
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </div>
+    <!-- ========== Order-Summary Area (End) ========== -->
 
     <!-- ========== Order-Summary Area (Start) ========== -->
-    <div class="order-summary order-details-item">
+    <div class="order-summary order-details-item" style="float: right;">
 
       <div class="content">
 
@@ -160,6 +226,7 @@
       </div>
 
     </div>
+    <div style="clear: both;"></div>
     <!-- ========== Order-Summary Area (End) ========== -->
 
   </section>

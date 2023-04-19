@@ -20,12 +20,25 @@ class WishlistAdmin(admin.ModelAdmin):
 
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ["user", "order_id", "payment_status", "discount", "subtotal", "total"]
+    list_display = ["user", "order_id", "payment_status", "discount", "subtotal", "total", "shipping_date",
+                    "delivery_date"]
 
 
 class OrderItemsAdmin(admin.ModelAdmin):
-    list_display = ["order", "product", "quantity", "discount", "subtotal", "total"]
+    list_display = ["order", "product", "user", "quantity", "discount", "subtotal", "total", "payment_status"]
+    def payment_status(self, obj):
+        """ Payment status detail
+            NOTPAID = 0
+            PAID = 1
+            PARTPAID = 2
+            CANCELLED = 3
+        """
+        payment_status = obj.order.payment_status
+        payment_status_dict = {0: "Not Paid", 1: "Paid", 2: "Partial Paid", 3: "Cancelled"}
+        return payment_status_dict[payment_status]
 
+    def user(self, obj):
+        return obj.order.user.username
 
 class UserOrderAddressAdmin(admin.ModelAdmin):
     list_display = ["user", "order", "address"]
