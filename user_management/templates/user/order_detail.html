@@ -133,6 +133,8 @@
                 Order Delivered
               {% elif order_details.0.shipping_date %}
                 Order Shipped
+              {% else %}
+                Waiting for Shipping
               {% endif %}
             </div>
           </div>

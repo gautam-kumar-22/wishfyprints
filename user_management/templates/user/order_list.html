@@ -48,7 +48,15 @@
             <div class="box status cancelled">Cancelled</div>
             {% endif %}
 
-            <div class="box">Dispatched</div>
+            <div class="box">
+              {% if order.delivery_date %}
+                Order Delivered
+              {% elif order.shipping_date %}
+                Order Shipped
+              {% else %}
+                Waiting for Shipping
+              {% endif %}
+            </div>
 
             <div class="box action"><a href="{% url 'order-detail' order.id %}" class="icon fas fa-eye"></a></div>
           </div>
