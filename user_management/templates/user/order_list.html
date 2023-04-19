@@ -49,12 +49,14 @@
             {% endif %}
 
             <div class="box">
-              {% if order.delivery_date %}
-                Order Delivered
+              {% if not order.payment_status %}
+                <div class="box status processing">Payment Pending</div>
+              {% elif order.delivery_date %}
+                <div class="box status completed">Order Delivered</div>
               {% elif order.shipping_date %}
-                Order Shipped
+                <div class="box status completed">Order Shipped</div>
               {% else %}
-                Waiting for Shipping
+                <div class="box status processing">Waiting for Shipping</div>
               {% endif %}
             </div>
 

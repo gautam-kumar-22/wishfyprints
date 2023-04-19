@@ -129,7 +129,9 @@
           <div style="float: right;right: 7%;position: relative;">
             <div class="order-id">Current Status</div>
             <div class="delivery" style="color: green; font-weight: 600;">
-              {% if order_details.0.delivery_date %}
+              {% if not order_details.0.payment_status %}
+                Payment Pending
+              {% elif order_details.0.delivery_date %}
                 Order Delivered
               {% elif order_details.0.shipping_date %}
                 Order Shipped
@@ -151,7 +153,7 @@
           <div class="summary-item">
 
           </div>
-
+        {% if order_details.0.payment_status %}
           <div class="summary-item">
             <div class="name box">Shipping Date</div>
             <div class="value box">
@@ -173,7 +175,7 @@
               {% endif %}
             </div>
           </div>
-
+        {% endif %}
 
         </div>
 
@@ -210,7 +212,7 @@
 
           <div class="summary-item">
             <div class="name box">discount</div>
-            <div class="value box">₹ {{order_details.0.discount}}</div>
+            <div class="value box">(-) ₹ {{order_details.0.discount}}</div>
           </div>
 
           <div class="summary-item">
