@@ -1,9 +1,11 @@
 {% load static %}
 <!-- ==================== Header Area (Start) ==================== -->
 <header>
-<div class="holder">
-  <div class="news"><i>This website is under maintenance.... We are sorry for your inconvenience.</i></div>
-</div>
+  {% if settings.is_promotion %}
+    <div class="holder" style="background: {{settings.promotion_background_color}}">
+      <div class="news"><i>{{settings.promotion_title}}</i></div>
+    </div>
+  {% endif %}
 <!-- ===== Header Area (Start) ===== -->
 <div class="header">
 
@@ -70,7 +72,7 @@
 
     <div class="icon-container" style="z-index: 1111">
       {% if user.is_authenticated %}
-      <div class="title" style="color: #fff;"><h2>Welcome! &nbsp;&nbsp; {{user.username}}</h2></div>
+      <div class="title"><h2><a style="color: #fff;" href="{% url 'profile' %}">Welcome! &nbsp;&nbsp; {{user.username}}</a> </h2></div>
       <div class="dropdown-menu">
         <a class="icon far fa-user"></a>
         <div class="dropdown-content"  style="right: 0; !important; left: UNSET !important;">

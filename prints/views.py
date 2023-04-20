@@ -25,7 +25,7 @@ def get_home_page_detail(request):
     about_us = AboutUs.objects.all().first()
     features = Features.objects.filter(status=True)
     context = get_page_context(request)
-    slider = Slider.objects.filter(page__title='Home')
+    slider = Slider.objects.filter(page__title='Home', status=True)
     projects = Project.objects.filter(status=True)
     products = Product.objects.filter(status=True, category__status=True)
     photos = Photo.objects.all()

@@ -53,8 +53,9 @@ class Settings(models.Model):
     office_time = models.CharField(max_length=200, null=True, blank=True)
     office_day = models.CharField(max_length=200, null=True, blank=True)
     website = models.CharField(max_length=200, null=True, blank=True)
-    technology_title = models.CharField(max_length=200, null=True, blank=True)
-    technology_description = models.TextField(null=True, blank=True)
+    is_promotion = models.BooleanField(null=True, blank=True, default=False)
+    promotion_title = models.CharField(null=True, blank=True, max_length=255)
+    promotion_background_color = models.CharField(null=True, blank=True, max_length=255)
 
 
 class Contact(models.Model):

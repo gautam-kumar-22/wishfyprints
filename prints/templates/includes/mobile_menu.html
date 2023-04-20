@@ -44,7 +44,7 @@
     <div class="nav-link">
     {% for category in categories %}
       <div class="main-nav-link">
-      <a class="nav-btn" href="{% url 'products' %}?category={{category.type}}">{{category.type}}</a>
+      <a class="nav-btn" href="{% url 'products' %}?category={{category.slug}}">{{category.type}}</a>
       </div>
       {% endfor %}
     </div>
