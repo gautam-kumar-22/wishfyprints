@@ -39,7 +39,7 @@
           <div class="orderlist-item">
             <div class="box order-id">#{{ order.order_id }}</div>
             <div class="box price">{{ order.created_on }}</div>
-            <div class="box total">{{order.total}}</div>
+            <div class="box total">₹ {{order.total}}</div>
             {% if order.payment_status %}
             <div class="box status completed">Paid</div>
             {% elif order.payment_status == 0 %}
