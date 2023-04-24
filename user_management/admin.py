@@ -62,7 +62,7 @@ class OrderAdmin(admin.ModelAdmin):
 
 class OrderItemsAdmin(admin.ModelAdmin):
     list_display = ["order", "product", "user", "quantity", "discount", "subtotal", "total", "payment_status",
-                    "created"]
+                    "order_status", "created"]
     search_fields = ["user", "order_id"]
     list_filter = (('created', MyDateTimeFilter,),)
 
@@ -74,8 +74,22 @@ class OrderItemsAdmin(admin.ModelAdmin):
             CANCELLED = 3
         """
         payment_status = obj.order.payment_status
-        payment_status_dict = {0: "Not Paid", 1: "Paid", 2: "Partial Paid", 3: "Cancelled"}
-        return payment_status_dict[payment_status]
+        payment_status_dict = {
+            0: "<span style='color: red; font-weight: bold;'>Not Paid</span>",
+            1: "<span style='color: green; font-weight: bold;'>Paid</span>",
+            2: "<span style='color: yellowgreen; font-weight: bold;'>Partial Paid</span>",
+            3: "<span style='color: red; font-weight: bold;'>Cancelled</span>"}
+        return format_html(payment_status_dict[payment_status])
+
+    def order_status(self, obj):
+        """payment_status_dict = {0: "Not Paid", 1: "Paid", 2: "Partial Paid", 3: "Cancelled"}"""
+        payment_status = obj.order.payment_status
+        if payment_status == 1 and obj.order.shipping_date is None:
+            return format_html('<span style="color: orange;"><b>New Order<b></span>')
+        if payment_status == 1 and obj.order.shipping_date is not None and obj.order.delivery_date is None:
+            return format_html('<span style="color: yellowgreen;"><b>Order Shipped<b></span>')
+        if payment_status == 1 and obj.order.shipping_date is not None and obj.order.delivery_date is not None:
+            return format_html('<span style="color: green;"><b>Order Delivered<b></span>')
 
     def user(self, obj):
         return obj.order.user.username

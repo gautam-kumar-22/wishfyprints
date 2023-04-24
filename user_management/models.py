@@ -129,6 +129,10 @@ class OrderItems(models.Model):
         else:
           return 'Order Item'
 
+    class Meta:
+        get_latest_by = 'created'
+        ordering = ('-created',)
+
 
 class UserOrderAddress(TimeStampedModel):
     user = models.ForeignKey(User, on_delete=models.RESTRICT, null=True, blank=True)
