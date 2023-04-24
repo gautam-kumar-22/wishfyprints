@@ -63,7 +63,7 @@ class OrderAdmin(admin.ModelAdmin):
 class OrderItemsAdmin(admin.ModelAdmin):
     list_display = ["order", "product", "user", "quantity", "discount", "subtotal", "total", "payment_status",
                     "order_status", "created"]
-    search_fields = ["user", "order_id"]
+    search_fields = ["order__order_id"]
     list_filter = (('created', MyDateTimeFilter,),)
 
     def payment_status(self, obj):
