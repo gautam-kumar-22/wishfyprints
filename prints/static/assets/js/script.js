@@ -75,7 +75,8 @@ toastr.options = {
         }));
 
         // list view and grid view setting
-        $(".grid").hide();
+        $(".list").hide();
+        $(".grid").show();
         var location = window.location.href;
         if (location.indexOf('grid') > -1){
             $(".list").hide();
